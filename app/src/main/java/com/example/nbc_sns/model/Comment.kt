@@ -1,6 +1,6 @@
 package com.example.nbc_sns.model
 
 data class Comment (
-    val authorId: String,
+    val userId: Int,
     val content: String,
 )

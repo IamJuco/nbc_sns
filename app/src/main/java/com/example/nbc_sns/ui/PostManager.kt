@@ -1,8 +1,8 @@
 package com.example.nbc_sns.ui
 
-import android.graphics.Bitmap
 import com.example.nbc_sns.model.Comment
 import com.example.nbc_sns.model.Post
+import com.example.nbc_sns.model.PostImages
 
 object PostManager {
 
@@ -17,9 +17,9 @@ object PostManager {
     }
 
     // 등록된 포스트 객체를 반환함
-    fun addPost(content: String, images: List<Bitmap>, userId: String): Post {
+    fun addPost(content: String, postImages: PostImages, userId: String): Post {
         val currentPostId = postId++
-        val createdPost = Post(currentPostId, userId, content, images, emptyList())
+        val createdPost = Post(currentPostId, userId, content, postImages, emptyList())
         posts[currentPostId] = createdPost
         return createdPost
     }

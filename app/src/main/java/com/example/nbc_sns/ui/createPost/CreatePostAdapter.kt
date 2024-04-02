@@ -8,9 +8,7 @@ import com.example.nbc_sns.databinding.ItemSelectedImageAtCreatePostBinding
 import com.example.nbc_sns.ui.selectImage.GalleryItem
 import com.example.nbc_sns.util.GalleryItemDiffCallback
 
-class CreatePostAdapter(
-    private val imageLocationListener: ImageLocationListener,
-): ListAdapter<GalleryItem, CreatePostAdapter.ViewHolder>(GalleryItemDiffCallback()) {
+class CreatePostAdapter: ListAdapter<GalleryItem, CreatePostAdapter.ViewHolder>(GalleryItemDiffCallback()) {
 
     inner class ViewHolder(private val binding: ItemSelectedImageAtCreatePostBinding): RecyclerView.ViewHolder(binding.root) {
 

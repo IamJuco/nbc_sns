@@ -18,7 +18,7 @@ class CreatePostActivity : AppCompatActivity(), ImageLocationListener {
     private lateinit var userId: String
 
     private val adapter by lazy {
-        CreatePostAdapter(this)
+        CreatePostAdapter()
     }
 
     override fun changedTo(position: Int) {

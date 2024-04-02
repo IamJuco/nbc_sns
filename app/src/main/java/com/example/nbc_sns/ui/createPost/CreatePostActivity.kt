@@ -96,11 +96,11 @@ class CreatePostActivity : AppCompatActivity(), GalleryItemSelectListener {
     // 권한을 거부한 경우, 안내 문구를 띄우고 사용자가 직접 설정에 들어가서 권한을 설정하도록 유도
     private fun showPermissionExplanation() {
         MaterialAlertDialogBuilder(this)
-            .setTitle("이미지 권한 안내")
-            .setMessage("갤러리에 있는 이미지에 접근하려면 저장소 권한이 필요합니다.")
-            .setNegativeButton("허용 안함") { dialog: DialogInterface, which: Int ->
+            .setTitle(getString(R.string.image_permission_title))
+            .setMessage(getString(R.string.image_permission_message))
+            .setNegativeButton(getString(R.string.image_permission_negative)) { dialog: DialogInterface, which: Int ->
             }
-            .setPositiveButton("허용") { dialog, which ->
+            .setPositiveButton(getString(R.string.image_permission_positive)) { dialog, which ->
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                     data = Uri.parse("package:" + baseContext.packageName)
                 }

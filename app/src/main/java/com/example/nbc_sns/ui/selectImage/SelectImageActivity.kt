@@ -100,11 +100,17 @@ class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
                 baseContext,
                 readImagePermission
             ) == PackageManager.PERMISSION_GRANTED -> {
-                ActivityCompat.requestPermissions(this, arrayOf(readImagePermission), SUCCESS_REQUEST_CODE)
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(readImagePermission),
+                    SUCCESS_REQUEST_CODE
+                )
             }
 
             ActivityCompat.shouldShowRequestPermissionRationale(this, readImagePermission) -> {
-                requestPermissionLauncher.launch(readImagePermission)
+                showPermissionExplanation(true) {
+                    requestPermissionLauncher.launch(readImagePermission)
+                }
             }
 
             else -> {
@@ -125,13 +131,20 @@ class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
     }
 
     // 권한을 거부한 경우, 안내 문구를 띄우고 사용자가 직접 설정에 들어가서 권한을 설정하도록 유도
-    private fun showPermissionExplanation() {
+    private fun showPermissionExplanation(
+        isPossibleToShowPermission: Boolean = false,
+        callback: () -> Unit = {}
+    ) {
         MaterialAlertDialogBuilder(this)
             .setTitle(getString(R.string.image_permission_title))
             .setMessage(getString(R.string.image_permission_message))
             .setNegativeButton(getString(R.string.image_permission_negative)) { dialog: DialogInterface, which: Int ->
             }
             .setPositiveButton(getString(R.string.image_permission_positive)) { dialog, which ->
+                if (isPossibleToShowPermission) {
+                    callback()
+                    return@setPositiveButton
+                }
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                     data = Uri.parse("package:" + baseContext.packageName)
                 }

@@ -43,6 +43,7 @@ class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
             selectedItems.size,
             GalleryAdapter.MAX_AVAILABLE_SELECTING_COUNT
         )
+        binding.btnSelect.isEnabled = selectedItems.isNotEmpty()
         selectedImageAdapter.submitList(selectedItems)
     }
 

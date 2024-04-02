@@ -18,6 +18,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.nbc_sns.R
 import com.example.nbc_sns.databinding.ActivitySelectImageBinding
+import com.example.nbc_sns.model.SelectedImage
+import com.example.nbc_sns.ui.createPost.CreatePostActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Date
 
@@ -25,8 +27,12 @@ import java.util.Date
 class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
 
     private lateinit var binding: ActivitySelectImageBinding
-    private val galleryAdapter = GalleryAdapter(this)
-    private val selectedImageAdapter = SelectedImageAdapter()
+    private val galleryAdapter by lazy {
+        GalleryAdapter(this)
+    }
+    private val selectedImageAdapter by lazy {
+        SelectedImageAdapter()
+    }
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -72,6 +78,13 @@ class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
     private fun setListener() {
         binding.ibRequestPermission.setOnClickListener {
             requestGalleryPermission()
+        }
+        binding.btnSelect.setOnClickListener {
+            val selectedImage = SelectedImage(selectedImageAdapter.currentList)
+            val intent = Intent(this, CreatePostActivity::class.java).apply {
+                putExtra(CreatePostActivity.BUNDLE_KEY_FOR_CREATE_POST_IMAGE, selectedImage)
+            }
+            startActivity(intent)
         }
     }
 

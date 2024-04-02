@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#87CEEB"
     tools:context=".MainActivity"
     tools:ignore="ExtraText">
 
@@ -129,7 +130,7 @@
         android:id="@+id/etRePw"
         android:layout_width="321dp"
         android:layout_height="54dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:hint="비밀번호를 한번 더 입력해주세요."
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"

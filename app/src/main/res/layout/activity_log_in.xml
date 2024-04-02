@@ -6,13 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btnEng"
+        android:layout_width="125dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:text="한국어 / English"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tvTop"
-        android:layout_width="109dp"
-        android:layout_height="73dp"
-        android:text="한국어"
+        android:layout_width="243dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="50dp"
+        android:text="INSTAR-GRAM"
         android:textAlignment="center"
-        android:textSize="30dp"
+        android:textSize="36dp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/ivTeam"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,9 +34,10 @@
 
     <ImageView
         android:id="@+id/ivTeam"
-        android:layout_width="212dp"
-        android:layout_height="84dp"
-        android:src="@drawable/dice_5"
+        android:layout_width="315dp"
+        android:layout_height="185dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/team_logo"
         app:layout_constraintBottom_toTopOf="@+id/etEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,18 +50,6 @@
         android:layout_height="59dp"
         android:layout_marginTop="32dp"
         android:hint="이메일을 입력해주세요"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPw"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/etPw"
-        android:layout_width="321dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="16dp"
-        android:hint="비밀번호를 입력해주세요"
-        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
@@ -56,11 +57,26 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <EditText
+        android:id="@+id/etPw"
+        android:layout_width="321dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        android:hint="비밀번호를 입력해주세요"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail"
+        tools:ignore="MissingConstraints" />
+
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="32dp"
         android:text="로그인"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,11 +89,10 @@
         android:id="@+id/buttonRegister"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="36dp"
         android:text="회원가입"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
         tools:ignore="MissingConstraints" />

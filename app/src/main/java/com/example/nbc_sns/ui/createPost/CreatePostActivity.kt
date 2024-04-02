@@ -1,6 +1,5 @@
 package com.example.nbc_sns.ui.createPost
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast

@@ -1,6 +1,5 @@
 package com.example.nbc_sns.ui
 
-import android.graphics.Bitmap
 import com.example.nbc_sns.model.Comment
 import com.example.nbc_sns.model.Post
 import com.example.nbc_sns.model.PostImages

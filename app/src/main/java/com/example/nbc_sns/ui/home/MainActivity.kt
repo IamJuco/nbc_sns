@@ -9,6 +9,7 @@ import com.example.nbc_sns.model.Post
 import com.example.nbc_sns.model.UserInfo
 import com.example.nbc_sns.ui.PostManager
 import com.example.nbc_sns.ui.UserManager
+import com.example.nbc_sns.ui.UserManager.getUser
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +18,12 @@ class MainActivity : AppCompatActivity() {
 
         createInitData()
     }
+
+    // 회원일 경우 Mypage이동 아닐경우 로그인 화면으로 이동 할건지
+//    private fun onClickMyPage() {
+//        if ()
+//    }
+
 
     private fun createInitData() {
         // 사용자 기본 정보 입력

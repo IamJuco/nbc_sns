@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="8dp"
     android:layout_width="match_parent"
+    android:padding="8dp"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/gallery_selected_background"
+        android:background="@drawable/selected_order_background"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
         android:textColor="?attr/colorOnPrimary"

@@ -1,16 +1,18 @@
-package com.example.nbc_sns.ui.selectImage
+package com.example.nbc_sns.ui.createPost
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nbc_sns.databinding.ItemSelectedImageBinding
+import com.example.nbc_sns.databinding.ItemSelectedImageAtCreatePostBinding
+import com.example.nbc_sns.ui.selectImage.GalleryItem
 import com.example.nbc_sns.util.GalleryItemDiffCallback
 
-class SelectedImageAdapter: ListAdapter<GalleryItem, SelectedImageAdapter.ViewHolder>(GalleryItemDiffCallback()) {
+class CreatePostAdapter(
+    private val imageLocationListener: ImageLocationListener,
+): ListAdapter<GalleryItem, CreatePostAdapter.ViewHolder>(GalleryItemDiffCallback()) {
 
-    inner class ViewHolder(private val binding: ItemSelectedImageBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemSelectedImageAtCreatePostBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(galleryItem: GalleryItem) {
             binding.imageViewThumbnail.setImageURI(galleryItem.uri)
@@ -19,7 +21,7 @@ class SelectedImageAdapter: ListAdapter<GalleryItem, SelectedImageAdapter.ViewHo
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemSelectedImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemSelectedImageAtCreatePostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

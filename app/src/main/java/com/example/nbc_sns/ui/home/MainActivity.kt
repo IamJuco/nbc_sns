@@ -5,10 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.toBitmap
 import com.example.nbc_sns.R
-import com.example.nbc_sns.model.Post
+import com.example.nbc_sns.model.PostImages
 import com.example.nbc_sns.model.UserInfo
 import com.example.nbc_sns.ui.PostManager
 import com.example.nbc_sns.ui.UserManager
+import com.example.nbc_sns.util.getUriToDrawable
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,11 +42,10 @@ class MainActivity : AppCompatActivity() {
                     "여러분의 의견은 어떠신가요?\n" +
                     "\n" +
                     "#엉망잔칭토론클럽 #엉망잔칭토론회",
-            listOf(
-                AppCompatResources.getDrawable(
-                    baseContext,
-                    R.drawable.new_jeans_sample_post_image
-                )!!.toBitmap()
+            PostImages(
+                listOf(
+                    getUriToDrawable(baseContext, R.drawable.new_jeans_sample_post_image)
+                )
             ),
             newJeans.id,
         )

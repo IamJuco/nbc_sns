@@ -19,7 +19,7 @@
         tools:listitem="@layout/item_selected_image_at_create_post" />
 
     <TextView
-        android:id="@+id/expand_banner_button"
+        android:id="@+id/text_view_image_index"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"

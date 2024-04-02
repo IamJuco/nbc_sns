@@ -11,19 +11,22 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import android.webkit.MimeTypeMap
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.nbc_sns.R
 import com.example.nbc_sns.databinding.ActivityCreatePostBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Date
 
 
-class CreatePostActivity : AppCompatActivity() {
+class CreatePostActivity : AppCompatActivity(), GalleryItemSelectListener {
 
     private lateinit var binding: ActivityCreatePostBinding
-    private val galleryAdapter = GalleryAdapter()
+    private val galleryAdapter = GalleryAdapter(this)
+    private val selectedImageAdapter = SelectedImageAdapter()
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -34,6 +37,16 @@ class CreatePostActivity : AppCompatActivity() {
                 showPermissionExplanation()
             }
         }
+
+    override fun update(selectedItems: List<GalleryItem>) {
+        binding.tvSelectedImageCount.text = getString(R.string.text_for_selected_image).format(selectedItems.size, GalleryAdapter.MAX_AVAILABLE_SELECTING_COUNT)
+        selectedImageAdapter.submitList(selectedItems)
+    }
+
+    override fun exceedPossibleCount() {
+        Toast.makeText(baseContext,
+            getString(R.string.exceed_max_available_count).format(GalleryAdapter.MAX_AVAILABLE_SELECTING_COUNT), Toast.LENGTH_SHORT).show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +59,7 @@ class CreatePostActivity : AppCompatActivity() {
 
     private fun setRecyclerView() {
         binding.rvGallery.adapter = galleryAdapter
+        binding.rvSelectedImage.adapter = selectedImageAdapter
     }
 
     private fun setListener() {
@@ -85,7 +99,6 @@ class CreatePostActivity : AppCompatActivity() {
             .setTitle("이미지 권한 안내")
             .setMessage("갤러리에 있는 이미지에 접근하려면 저장소 권한이 필요합니다.")
             .setNegativeButton("허용 안함") { dialog: DialogInterface, which: Int ->
-                Unit
             }
             .setPositiveButton("허용") { dialog, which ->
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {

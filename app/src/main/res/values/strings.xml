@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">nbc_sns</string>
+    <string name="exceed_max_available_count">최대 %d개의 이미지만 선택 가능합니다.</string>
+    <string name="text_for_selected_image">%d/%d</string>
 </resources>

@@ -124,10 +124,15 @@ class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == SUCCESS_REQUEST_CODE) {
-            getImageFromGallery()
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getImageFromGallery()
+            } else {
+                showPermissionExplanation()
+            }
+            return
         }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     // 권한을 거부한 경우, 안내 문구를 띄우고 사용자가 직접 설정에 들어가서 권한을 설정하도록 유도

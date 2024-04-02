@@ -22,7 +22,8 @@ object UserManager {
         return users.remove(userId) != null
     }
 
+
     fun isUserRegistered(email: String, password: String): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 }

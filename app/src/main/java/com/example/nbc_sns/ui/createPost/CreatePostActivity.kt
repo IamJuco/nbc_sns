@@ -45,11 +45,11 @@ class CreatePostActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerView() {
-        binding.recyclerviewGallery.adapter = galleryAdapter
+        binding.rvGallery.adapter = galleryAdapter
     }
 
     private fun setListener() {
-        binding.imageViewSelected.setOnClickListener {
+        binding.ibRequestPermission.setOnClickListener {
             requestGalleryPermission()
         }
     }

@@ -100,7 +100,7 @@ class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
                 baseContext,
                 readImagePermission
             ) == PackageManager.PERMISSION_GRANTED -> {
-                getImageFromGallery()
+                ActivityCompat.requestPermissions(this, arrayOf(readImagePermission), SUCCESS_REQUEST_CODE)
             }
 
             ActivityCompat.shouldShowRequestPermissionRationale(this, readImagePermission) -> {
@@ -110,6 +110,17 @@ class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
             else -> {
                 requestPermissionLauncher.launch(readImagePermission)
             }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == SUCCESS_REQUEST_CODE) {
+            getImageFromGallery()
         }
     }
 
@@ -161,5 +172,9 @@ class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
             }
         }
         galleryAdapter.submitList(list)
+    }
+
+    companion object {
+        private const val SUCCESS_REQUEST_CODE = 1000
     }
 }

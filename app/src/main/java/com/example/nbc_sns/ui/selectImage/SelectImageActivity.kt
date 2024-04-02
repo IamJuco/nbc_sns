@@ -1,4 +1,4 @@
-package com.example.nbc_sns.ui.createPost
+package com.example.nbc_sns.ui.selectImage
 
 import android.Manifest
 import android.content.ContentUris
@@ -17,14 +17,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.nbc_sns.R
-import com.example.nbc_sns.databinding.ActivityCreatePostBinding
+import com.example.nbc_sns.databinding.ActivitySelectImageBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Date
 
 
-class CreatePostActivity : AppCompatActivity(), GalleryItemSelectListener {
+class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
 
-    private lateinit var binding: ActivityCreatePostBinding
+    private lateinit var binding: ActivitySelectImageBinding
     private val galleryAdapter = GalleryAdapter(this)
     private val selectedImageAdapter = SelectedImageAdapter()
 
@@ -39,18 +39,24 @@ class CreatePostActivity : AppCompatActivity(), GalleryItemSelectListener {
         }
 
     override fun update(selectedItems: List<GalleryItem>) {
-        binding.tvSelectedImageCount.text = getString(R.string.text_for_selected_image).format(selectedItems.size, GalleryAdapter.MAX_AVAILABLE_SELECTING_COUNT)
+        binding.tvSelectedImageCount.text = getString(R.string.text_for_selected_image).format(
+            selectedItems.size,
+            GalleryAdapter.MAX_AVAILABLE_SELECTING_COUNT
+        )
         selectedImageAdapter.submitList(selectedItems)
     }
 
     override fun exceedPossibleCount() {
-        Toast.makeText(baseContext,
-            getString(R.string.exceed_max_available_count).format(GalleryAdapter.MAX_AVAILABLE_SELECTING_COUNT), Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            baseContext,
+            getString(R.string.exceed_max_available_count).format(GalleryAdapter.MAX_AVAILABLE_SELECTING_COUNT),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCreatePostBinding.inflate(layoutInflater)
+        binding = ActivitySelectImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setRecyclerView()

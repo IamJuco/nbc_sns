@@ -1,4 +1,4 @@
-package com.example.nbc_sns.ui.createPost
+package com.example.nbc_sns.ui.selectImage
 
 interface GalleryItemSelectListener {
 

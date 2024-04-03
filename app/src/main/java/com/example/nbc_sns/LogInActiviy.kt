@@ -3,6 +3,8 @@ package com.example.nbc_sns
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nbc_sns.databinding.ActivityLogInBinding
 
@@ -26,6 +28,9 @@ class LogInActivity : AppCompatActivity() {
             val putPassword = if (isEnglish) R.string.put_password else R.string.put_password1
             val login = if (isEnglish) R.string.login else R.string.login1
             val register = if (isEnglish) R.string.register else R.string.register1
+
+            intent.getStringExtra("id") ?: ""
+            intent.getStringExtra("pw") ?: ""
 
             binding.etEmail.hint = getString(putEmail)
             binding.etPw.hint = getString(putPassword)
@@ -52,10 +57,11 @@ class LogInActivity : AppCompatActivity() {
 
                 if (idExists && nicknameExists) {
                     Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                    // 임시로 Main 대신 RegisterActivity 이동
                     val intent = Intent(this, RegisterActivity::class.java)
-                    // 임시로 Main 대신 RegisterActivity로 이동
+                    intent.putExtra("id", "")
+                    intent.putExtra("pw", "")
                     startActivity(intent)
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                     return true
 
                 } else {

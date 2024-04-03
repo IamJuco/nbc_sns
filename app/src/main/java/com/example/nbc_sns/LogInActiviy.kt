@@ -29,8 +29,8 @@ class LogInActivity : AppCompatActivity() {
 
             binding.etEmail.hint = getString(putEmail)
             binding.etPw.hint = getString(putPassword)
-            binding.buttonLogin.text = getString(login)
-            binding.buttonRegister.text = getString(register)
+            binding.btnLogin.text = getString(login)
+            binding.btnRegister.text = getString(register)
 
 //            val confirmEmail = if (isEnglish) R.string.confirm_email else R.string.confirm_email1
 //            val loginSucceed = if (isEnglish) R.string.login_succeed else R.string.login_succeed1
@@ -43,7 +43,7 @@ class LogInActivity : AppCompatActivity() {
 //            text3 = getString(unregisteredEmail)
         }
 
-        binding.buttonLogin.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPw.text.toString()
 
@@ -63,7 +63,7 @@ class LogInActivity : AppCompatActivity() {
             }
         }
 
-        binding.buttonRegister.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

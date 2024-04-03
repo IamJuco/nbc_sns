@@ -1,9 +1,11 @@
 package com.example.nbc_sns.ui.profile
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nbc_sns.R
 import com.example.nbc_sns.databinding.ActivityProfileBinding
@@ -12,6 +14,8 @@ import com.example.nbc_sns.model.UserInfo
 import com.example.nbc_sns.ui.PostManager
 import com.example.nbc_sns.ui.UserManager
 import com.example.nbc_sns.ui.createPost.CreatePostActivity.Companion.BUNDLE_KEY_FOR_USER_ID
+import com.example.nbc_sns.ui.editProfile.EditProfileActivity
+import com.example.nbc_sns.ui.editProfile.EditProfileActivity.Companion.BUNDLE_KEY_FOR_USER_ID_CHECK
 import com.example.nbc_sns.ui.post.PostActivity
 import com.example.nbc_sns.ui.post.PostActivity.Companion.BUNDLE_KEY_FOR_POST_ID_CHECK
 import com.example.nbc_sns.ui.selectImage.SelectImageActivity
@@ -23,6 +27,23 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
     private lateinit var userId: String
     private val adapter by lazy {
         ProfileAdapter(this)
+    }
+
+    private val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode != Activity.RESULT_OK) {
+                return@registerForActivityResult
+            }
+            updateUserProfile()
+        }
+
+    private fun updateUserProfile() {
+        val userInfo = UserManager.getUser(userId) ?: run {
+            Toast.makeText(this, "유저 정보가 없습니다.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        binding.ivThumbnail.setImageURI(userInfo.thumbnail)
+        binding.tvNickname.text = userInfo.nickName
+        binding.tvIntroduction.text = userInfo.introduction
     }
 
     override fun onClick(postId: Int) {
@@ -93,25 +114,19 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
     private fun initView() {
         binding.ivThumbnail.clipToOutline = true // xml 설정은 API 30 이하에서 적용되지 않아 코드로 적용해야 함
         userId = "newjeans@gmail.com" // TODO : 다른 화면에서 Intent로 전달한 userId를 이용하도록 수정해야 함
-        val userInfo = UserManager.getUser(userId) ?: run {
-            Toast.makeText(this, "유저 정보가 없습니다.", Toast.LENGTH_SHORT).show()
-            finish()
-            return
-        }
-        val posts = PostManager.getPost(userInfo.id)
-
-        binding.ivThumbnail.setImageURI(userInfo.thumbnail)
-        binding.tvNickname.text = userInfo.nickName
-        binding.tvIntroduction.text = userInfo.introduction
-        binding.tvPostCount.text = posts.count().toString()
-
-        adapter.submitList(posts)
+        updateUserProfile()
+        updateUIAboutPost()
     }
 
     private fun setListener() {
         binding.btnCreatePost.setOnClickListener {
             startActivity(Intent(this, SelectImageActivity::class.java).apply {
                 putExtra(BUNDLE_KEY_FOR_USER_ID, userId)
+            })
+        }
+        binding.btnEditProfile.setOnClickListener {
+            activityResultLauncher.launch(Intent(this, EditProfileActivity::class.java).apply {
+                putExtra(BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
             })
         }
     }

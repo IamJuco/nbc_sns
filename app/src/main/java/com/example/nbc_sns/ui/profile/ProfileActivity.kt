@@ -12,22 +12,23 @@ import com.example.nbc_sns.model.UserInfo
 import com.example.nbc_sns.ui.PostManager
 import com.example.nbc_sns.ui.UserManager
 import com.example.nbc_sns.ui.createPost.CreatePostActivity.Companion.BUNDLE_KEY_FOR_USER_ID
+import com.example.nbc_sns.ui.post.PostActivity
+import com.example.nbc_sns.ui.post.PostActivity.Companion.BUNDLE_KEY_FOR_POST_ID_CHECK
 import com.example.nbc_sns.ui.selectImage.SelectImageActivity
 import com.example.nbc_sns.util.getUriToDrawable
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity(), PostClickListener {
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var userId: String
+    private val adapter by lazy {
+        ProfileAdapter(this)
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityProfileBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        fakeSetting()
-        initView()
-        setListener()
+    override fun onClick(postId: Int) {
+        startActivity(Intent(this, PostActivity::class.java).apply {
+            putExtra(BUNDLE_KEY_FOR_POST_ID_CHECK, postId)
+        })
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -41,6 +42,19 @@ class ProfileActivity : AppCompatActivity() {
     private fun updateUIAboutPost() {
         val posts = PostManager.getPost(userId)
         binding.tvPostCount.text = posts.count().toString()
+        adapter.submitList(posts)
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        fakeSetting()
+        setAdapter()
+        initView()
+        setListener()
     }
 
     private fun fakeSetting() {
@@ -72,6 +86,10 @@ class ProfileActivity : AppCompatActivity() {
         )
     }
 
+    private fun setAdapter() {
+        binding.rvPost.adapter = adapter
+    }
+
     private fun initView() {
         binding.ivThumbnail.clipToOutline = true // xml 설정은 API 30 이하에서 적용되지 않아 코드로 적용해야 함
         userId = "newjeans@gmail.com" // TODO : 다른 화면에서 Intent로 전달한 userId를 이용하도록 수정해야 함
@@ -86,6 +104,8 @@ class ProfileActivity : AppCompatActivity() {
         binding.tvNickname.text = userInfo.nickName
         binding.tvIntroduction.text = userInfo.introduction
         binding.tvPostCount.text = posts.count().toString()
+
+        adapter.submitList(posts)
     }
 
     private fun setListener() {

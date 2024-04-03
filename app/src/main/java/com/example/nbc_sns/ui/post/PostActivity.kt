@@ -9,4 +9,9 @@ class PostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
     }
+
+
+    companion object {
+        const val BUNDLE_KEY_FOR_POST_ID_CHECK = "KEY_FOR_POST_ID_CHECK"
+    }
 }

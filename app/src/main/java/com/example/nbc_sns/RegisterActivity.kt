@@ -4,8 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.viewbinding.ViewBinding
-import com.example.nbc_sns.databinding.ActivityLogInBinding
+import com.example.nbc_sns.UserManager.register
 import com.example.nbc_sns.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
@@ -30,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
             val putName = if (isEnglish) R.string.put_name else R.string.put_name1
             val putEmail = if (isEnglish) R.string.put_email else R.string.put_email1
             val putPassword = if (isEnglish) R.string.put_password else R.string.put_password1
-            val putRePassword = if (isEnglish)  R.string.put_re_password else R.string.put_re_password1
+            val putRePassword = if (isEnglish) R.string.put_re_password else R.string.put_re_password1
             val register = if (isEnglish) R.string.register else R.string.register1
 
             binding.etName.hint = getString(putName)
@@ -38,34 +37,7 @@ class RegisterActivity : AppCompatActivity() {
             binding.etPw.hint = getString(putPassword)
             binding.etRePw.hint = getString(putRePassword)
             binding.btnRegister.text = getString(register)
-
-//            val name = if (isEnglish) R.string.name else R.string.name1
-//            val email = if (isEnglish) R.string.email else R.string.email1
-//            val password = if (isEnglish) R.string.password else R.string.password1
-//            val rePassword = if (isEnglish)  R.string.re_password else R.string.re_password1
-//            val validEmail = if (isEnglish) R.string.valid_email else R.string.valid_email1
-//            val passwordLength = if (isEnglish) R.string.password_length else R.string.password_length1
-//            val information = if (isEnglish) R.string.information else R.string.information1
-//            val passwordMatch = if (isEnglish) R.string.password_match else R.string.password_match1
-
-//            var text1 = "이름(별명)"
-//            text1 = getString(name)
-//            var text2 = "아이디(이메일)"
-//            text2 = getString(email)
-//            var text3 = "비밀번호"
-//            text3 = getString(password)
-//            var text4 = "비밀번호 확인"
-//            text4 = getString(rePassword)
-//            var text5 = "유효한 이메일을 입력해 주세요"
-//            text5 = getString(putEmail)
-//            var text6 = "비밀번호는 8자 이상이어야 합니다"
-//            text6 = getString(putPassword)
-//            var text7 = "비밀번호가 일치하지 않습니다"
-//            text7 = getString(putRePassword)
-//            var text8 = "입력되지 않은 정보가 있습니다"
-//            text8 = getString(information)
         }
-
 
         binding.btnRegister.setOnClickListener {
             val name = binding.etName.text.toString()
@@ -79,17 +51,39 @@ class RegisterActivity : AppCompatActivity() {
 
             when {
                 !isEmailValid -> Toast.makeText(this, "유효한 이메일을 입력해 주세요", Toast.LENGTH_SHORT).show()
+
                 !isPasswordValid -> Toast.makeText(this, "비밀번호는 8자 이상이어야 합니다", Toast.LENGTH_SHORT).show()
+
                 pw != rePw -> Toast.makeText(this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
+
                 listOf(name, id, pw, rePw).any { it.isNullOrBlank() } ->
                     Toast.makeText(this, "입력되지 않은 정보가 있습니다", Toast.LENGTH_SHORT).show()
 
                 else -> {
-                    val intent = Intent(this, LogInActivity::class.java)
-                    startActivity(intent)
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                    finish()
+                    val userInfo = com.example.nbc_sns.model.UserInfo(
+                        id, pw, "", null, ""
+                    )
+
+                    val registerSuccess = register(userInfo)
+
+                    if (registerSuccess) {
+                        Toast.makeText(this, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, LogInActivity::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                        finish()
+
+                    } else {
+                        Toast.makeText(this, "이미 존재하는 사용자입니다", Toast.LENGTH_SHORT).show()
+                    }
                 }
+            }
+
+            fun register(userInfo: UserInfo): Boolean {
+                val idExists = userInfo.id in UserManager.users
+                val nicknameExists = userInfo.nickName in UserManager.users
+
+                return !(idExists && nicknameExists)
             }
         }
     }

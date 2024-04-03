@@ -31,35 +31,37 @@ class LogInActivity : AppCompatActivity() {
             binding.etPw.hint = getString(putPassword)
             binding.btnLogin.text = getString(login)
             binding.btnRegister.text = getString(register)
-
-//            val confirmEmail = if (isEnglish) R.string.confirm_email else R.string.confirm_email1
-//            val loginSucceed = if (isEnglish) R.string.login_succeed else R.string.login_succeed1
-//            val unregisteredEmail = if (isEnglish) R.string.unregistered_email else R.string.unregistered_email1
-//            var text1 = "아이디와 비밀번호를 확인해 주세요"
-//            text1 = getString(confirmEmail)
-//            var text2 = "로그인 성공"
-//            text2 = getString(loginSucceed)
-//            var text3 = "등록되지 않은 이메일입니다"
-//            text3 = getString(unregisteredEmail)
         }
 
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString()
-            val password = binding.etPw.text.toString()
+            val pw = binding.etPw.text.toString()
 
-            if (email.isNullOrBlank() || password.isNullOrBlank()) {
+            if (email.isNullOrBlank() || pw.isNullOrBlank()) {
                 Toast.makeText(this, "아이디와 비밀번호를 확인해 주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+
+            } else if (pw.length < 8) {
+                Toast.makeText(this, "비밀번호는 8자 이상이어야 합니다", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (UserManager.isUserRegistered(email, password)) {
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, RegisterActivity::class.java)
-                // 임시로 Main 대신 RegisterActivity로 이동
-                startActivity(intent)
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-            } else {
-                Toast.makeText(this, "등록되지 않은 사용자입니다", Toast.LENGTH_SHORT).show()
+            fun register(userInfo: UserInfo): Boolean {
+                val idExists = userInfo.id in UserManager.users
+                val nicknameExists = userInfo.nickName in UserManager.users
+
+                if (idExists && nicknameExists) {
+                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, RegisterActivity::class.java)
+                    // 임시로 Main 대신 RegisterActivity로 이동
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    return true
+
+                } else {
+                    Toast.makeText(this, "등록되지 않은 사용자입니다", Toast.LENGTH_SHORT).show()
+                    return false
+                }
             }
         }
 

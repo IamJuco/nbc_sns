@@ -21,10 +21,25 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/new_jeans_thumbnail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPrev"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPrev" />
+
+    <ImageView
+        android:id="@+id/ivEnlargementThumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:translationZ="1dp"
+        android:visibility="gone"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/new_jeans_thumbnail" />
 
     <TextView
         android:id="@+id/tvNickName"
@@ -39,12 +54,28 @@
     <ImageView
         android:id="@+id/ivPostImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_marginTop="16dp"
+        android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivThumbnail"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/new_jeans_sample_post_image" />
+
+    <ImageView
+        android:id="@+id/ivEnlargementPostImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:translationZ="1dp"
+        android:visibility="gone"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/new_jeans_sample_post_image" />
+
 
     <TextView
         android:id="@+id/tvPostContent"
@@ -59,11 +90,11 @@
         app:layout_constraintTop_toBottomOf="@+id/ivPostImage" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvAllComments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="댓글 모두 보기"
+        android:text="댓글"
         app:layout_constraintStart_toStartOf="@+id/svComments"
         app:layout_constraintTop_toBottomOf="@+id/tvPostContent" />
 
@@ -73,37 +104,26 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/ivCommentThumbnail"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/tvAllComments"
+        app:layout_constraintBottom_toTopOf="@+id/etAddComment">
 
-    <ImageView
-        android:id="@+id/ivCommentThumbnail"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+    </ScrollView>
 
     <EditText
         android:id="@+id/etAddComment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_margin="16dp"
+        android:background="@null"
         android:ems="10"
         android:hint="댓글 추가..."
         android:inputType="textMultiLine"
-        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivCommentThumbnail" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

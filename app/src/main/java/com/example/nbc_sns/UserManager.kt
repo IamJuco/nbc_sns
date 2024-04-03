@@ -1,5 +1,7 @@
 package com.example.nbc_sns
 
+import com.example.nbc_sns.model.UserInfo
+
 object UserManager {
 
     val users: HashMap<String, UserInfo> = hashMapOf() // Key: UserId , value: UserInfo

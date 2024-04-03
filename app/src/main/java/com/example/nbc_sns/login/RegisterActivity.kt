@@ -1,9 +1,10 @@
-package com.example.nbc_sns
+package com.example.nbc_sns.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.nbc_sns.R
 import com.example.nbc_sns.UserManager.register
 import com.example.nbc_sns.databinding.ActivityRegisterBinding
 
@@ -21,9 +22,10 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        var isEnglish = false
+
         binding.btnEng.setOnClickListener {
 
-            var isEnglish = false
             isEnglish = !isEnglish
 
             val putName = if (isEnglish) R.string.put_name else R.string.put_name1
@@ -83,13 +85,6 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.makeText(this, "이미 존재하는 사용자입니다", Toast.LENGTH_SHORT).show()
                     }
                 }
-            }
-
-            fun register(userInfo: UserInfo): Boolean {
-                val idExists = userInfo.id in UserManager.users
-                val nicknameExists = userInfo.nickName in UserManager.users
-
-                return !(idExists && nicknameExists)
             }
         }
     }

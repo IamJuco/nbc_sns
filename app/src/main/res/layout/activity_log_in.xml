@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#87CEEB"
     tools:context=".MainActivity">
 
     <Button
@@ -38,7 +37,7 @@
         android:layout_width="315dp"
         android:layout_height="185dp"
         android:layout_marginTop="80dp"
-        android:src="@drawable/team_logo"
+        android:src="@drawable/instagram"
         app:layout_constraintBottom_toTopOf="@+id/etEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

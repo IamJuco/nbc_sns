@@ -1,12 +1,13 @@
-package com.example.nbc_sns
+package com.example.nbc_sns.login
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.nbc_sns.R
+import com.example.nbc_sns.UserManager
 import com.example.nbc_sns.databinding.ActivityLogInBinding
+import com.example.nbc_sns.model.UserInfo
 
 class LogInActivity : AppCompatActivity() {
 
@@ -17,8 +18,10 @@ class LogInActivity : AppCompatActivity() {
         binding = ActivityLogInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        var isEnglish = false
+
         binding.btnEng.setOnClickListener {
-            var isEnglish = false
+
             isEnglish = !isEnglish
 
             val toastMessage = if (isEnglish) "Switched to English" else "한국어로 변경되었습니다"

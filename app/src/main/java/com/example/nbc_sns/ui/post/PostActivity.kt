@@ -13,5 +13,6 @@ class PostActivity : AppCompatActivity() {
 
     companion object {
         const val BUNDLE_KEY_FOR_POST_ID_CHECK = "KEY_FOR_POST_ID_CHECK"
+        const val BUNDLE_KEY_FOR_USER_ID_CHECK = "KEY_FOR_USER_ID_CHECK"
     }
 }

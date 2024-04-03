@@ -14,10 +14,10 @@ import com.example.nbc_sns.model.UserInfo
 import com.example.nbc_sns.ui.PostManager
 import com.example.nbc_sns.ui.UserManager
 import com.example.nbc_sns.ui.createPost.CreatePostActivity.Companion.BUNDLE_KEY_FOR_USER_ID
-import com.example.nbc_sns.ui.editProfile.EditProfileActivity.Companion.BUNDLE_KEY_FOR_USER_ID_CHECK
 import com.example.nbc_sns.ui.home.MainActivity
 import com.example.nbc_sns.ui.post.PostActivity
 import com.example.nbc_sns.ui.post.PostActivity.Companion.BUNDLE_KEY_FOR_POST_ID_CHECK
+import com.example.nbc_sns.ui.post.PostActivity.Companion.BUNDLE_KEY_FOR_USER_ID_CHECK
 import com.example.nbc_sns.ui.selectImage.SelectImageActivity
 import com.example.nbc_sns.util.getUriToDrawable
 

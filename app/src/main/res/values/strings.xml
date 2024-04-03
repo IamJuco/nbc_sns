@@ -10,7 +10,7 @@
     <string name="current_index_from_all">%d / %d</string>
     <string name="no_image_passed_through_intent">Activity 실행에 필요한 이미지가 전달되지 않았습니다.</string>
     <string name="post">게시물</string>
-    <string name="edit_profile">프로필 수정</string>
+    <string name="edit_profile_thumbnail">프로필 이미지 변경</string>
     <string name="write_post">게시글 작성</string>
     <string name="no_user_id_passed_through_intent">Activity 실행에 필요한 사용자 ID가 전달되지 않았습니다.</string>
     <string name="logout">로그아웃</string>

@@ -1,10 +1,10 @@
 package com.example.nbc_sns.ui.profile
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nbc_sns.R
@@ -14,7 +14,6 @@ import com.example.nbc_sns.model.UserInfo
 import com.example.nbc_sns.ui.PostManager
 import com.example.nbc_sns.ui.UserManager
 import com.example.nbc_sns.ui.createPost.CreatePostActivity.Companion.BUNDLE_KEY_FOR_USER_ID
-import com.example.nbc_sns.ui.editProfile.EditProfileActivity
 import com.example.nbc_sns.ui.editProfile.EditProfileActivity.Companion.BUNDLE_KEY_FOR_USER_ID_CHECK
 import com.example.nbc_sns.ui.home.MainActivity
 import com.example.nbc_sns.ui.post.PostActivity
@@ -30,22 +29,15 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
         ProfileAdapter(this)
     }
 
-    private val activityResultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode != Activity.RESULT_OK) {
-                return@registerForActivityResult
-            }
-            updateUserProfile()
+    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) {
+            updateUserProfileImage(uri)
         }
+    }
 
-    private fun updateUserProfile() {
-        val userInfo = UserManager.getUser(userId) ?: run {
-            Toast.makeText(this, "유저 정보가 없습니다.", Toast.LENGTH_SHORT).show()
-            return
-        }
-        binding.ivThumbnail.setImageURI(userInfo.thumbnail)
-        binding.tvNickname.text = userInfo.nickName
-        binding.tvIntroduction.text = userInfo.introduction
+    private fun updateUserProfileImage(uri: Uri) {
+        UserManager.updateUserInfo(userId, uri)
+        updateUserProfile()
     }
 
     override fun onClick(postId: Int) {
@@ -123,6 +115,16 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
         updateUIAboutPost()
     }
 
+    private fun updateUserProfile() {
+        val userInfo = UserManager.getUser(userId) ?: run {
+            Toast.makeText(this, "유저 정보가 없습니다.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        binding.ivThumbnail.setImageURI(userInfo.thumbnail)
+        binding.tvNickname.text = userInfo.nickName
+        binding.tvIntroduction.text = userInfo.introduction
+    }
+
     private fun setListener() {
         binding.btnCreatePost.setOnClickListener {
             startActivity(Intent(this, SelectImageActivity::class.java).apply {
@@ -130,9 +132,8 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
             })
         }
         binding.btnEditProfile.setOnClickListener {
-            activityResultLauncher.launch(Intent(this, EditProfileActivity::class.java).apply {
-                putExtra(BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
-            })
+            val mimeType = "image/*"
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.SingleMimeType(mimeType)))
         }
         binding.btnLogout.setOnClickListener {
             // TODO : 로그아웃 처리 필요

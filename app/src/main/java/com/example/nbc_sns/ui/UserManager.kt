@@ -1,5 +1,6 @@
 package com.example.nbc_sns.ui
 
+import android.net.Uri
 import com.example.nbc_sns.model.UserInfo
 
 object UserManager {
@@ -22,5 +23,10 @@ object UserManager {
     // 존재하지 않는 회원에 대해 회원 탈퇴를 시도할 경우 false, 아니면  true를 반환함
     fun unregister(userId: String): Boolean {
         return users.remove(userId) != null
+    }
+
+    fun updateUserInfo(userId: String, uri: Uri) {
+        val userInfo = users[userId] ?: return
+        users[userId] = userInfo.copy(thumbnail = uri)
     }
 }

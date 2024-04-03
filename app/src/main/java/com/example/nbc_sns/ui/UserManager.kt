@@ -23,4 +23,5 @@ object UserManager {
     fun unregister(userId: String): Boolean {
         return users.remove(userId) != null
     }
+
 }

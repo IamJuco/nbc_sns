@@ -45,7 +45,7 @@
         android:layout_margin="24dp"
         android:adjustViewBounds="true"
         android:background="@drawable/profile_circle_background"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_nickname"
         tools:clipToOutline="true"

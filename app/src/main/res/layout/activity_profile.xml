@@ -88,33 +88,66 @@
         android:lineSpacingMultiplier="1.2"
         android:lines="2"
         android:maxLines="2"
+        tools:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_thumbnail"
+        tools:text="최고의 토론만을 펼치는 엉망잔칭 토론클럽입니다.\n매년 엉망잔칭 토론회를 주관하고 있습니다. 최고의 토론만을 펼치는 엉망잔칭 토론클럽입니다. 매년 엉망잔칭 토론회를 주관하고 있습니다." />
+
+    <EditText
+        android:id="@+id/edt_introduction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:textSize="14sp"
+        android:background="@drawable/post_content_border"
+        android:gravity="start"
+        android:visibility="invisible"
+        android:padding="5dp"
+        android:lineSpacingMultiplier="0.8"
+        android:ellipsize="end"
+        android:lines="2"
+        android:maxLines="2"
+        tools:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_thumbnail"
         tools:text="최고의 토론만을 펼치는 엉망잔칭 토론클럽입니다.\n매년 엉망잔칭 토론회를 주관하고 있습니다. 최고의 토론만을 펼치는 엉망잔칭 토론클럽입니다. 매년 엉망잔칭 토론회를 주관하고 있습니다." />
 
     <Button
-        android:id="@+id/btn_edit_profile"
+        android:id="@+id/btn_edit_profile_thumbnail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:backgroundTint="@color/black"
         android:text="@string/edit_profile_thumbnail"
-        app:layout_constraintEnd_toStartOf="@id/btn_create_post"
+        app:layout_constraintEnd_toStartOf="@id/btn_edit_profile_introduction"
         app:layout_constraintStart_toStartOf="@id/tv_introduction"
+        app:layout_constraintTop_toBottomOf="@id/tv_introduction" />
+
+    <Button
+        android:id="@+id/btn_edit_profile_introduction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/black"
+        android:text="@string/edit_profile_introduction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_edit_profile_thumbnail"
         app:layout_constraintTop_toBottomOf="@id/tv_introduction" />
 
     <Button
         android:id="@+id/btn_create_post"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="@color/black"
         android:text="@string/write_post"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_edit_profile"
-        app:layout_constraintTop_toTopOf="@id/btn_edit_profile" />
+        app:layout_constraintEnd_toEndOf="@id/btn_logout"
+        app:layout_constraintTop_toBottomOf="@id/btn_logout" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

@@ -3,6 +3,7 @@ package com.example.nbc_sns.ui.profile
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,19 +26,26 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var userId: String
+    private var isEditIntroduction = false
     private val adapter by lazy {
         ProfileAdapter(this)
     }
 
-    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        if (uri != null) {
-            updateUserProfileImage(uri)
+    private val pickMedia =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                updateUserProfileImage(uri)
+            }
         }
-    }
 
     private fun updateUserProfileImage(uri: Uri) {
-        UserManager.updateUserInfo(userId, uri)
-        updateUserProfile()
+        val isUpdateDone = UserManager.updateUserThumbnail(userId, uri)
+        if (isUpdateDone) {
+            updateUserProfile()
+        } else {
+            Toast.makeText(this, getString(R.string.fail_edit_profile), Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
     override fun onClick(postId: Int) {
@@ -131,15 +139,48 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
                 putExtra(BUNDLE_KEY_FOR_USER_ID, userId)
             })
         }
-        binding.btnEditProfile.setOnClickListener {
+        binding.btnEditProfileThumbnail.setOnClickListener {
             val mimeType = "image/*"
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.SingleMimeType(mimeType)))
+            pickMedia.launch(
+                PickVisualMediaRequest(
+                    ActivityResultContracts.PickVisualMedia.SingleMimeType(
+                        mimeType
+                    )
+                )
+            )
+        }
+        binding.btnEditProfileIntroduction.setOnClickListener {
+            if (isEditIntroduction) {
+                binding.btnEditProfileIntroduction.text =
+                    getString(R.string.edit_profile_introduction)
+                val editedText = binding.edtIntroduction.text.toString()
+                binding.edtIntroduction.visibility = View.INVISIBLE
+                binding.tvIntroduction.visibility = View.VISIBLE
+                updateUserProfileInstruction(editedText)
+            } else {
+                binding.btnEditProfileIntroduction.text =
+                    getString(R.string.edit_profile_introduction_done)
+                binding.edtIntroduction.setText(binding.tvIntroduction.text)
+                binding.edtIntroduction.visibility = View.VISIBLE
+                binding.tvIntroduction.visibility = View.INVISIBLE
+            }
+            isEditIntroduction = !isEditIntroduction
         }
         binding.btnLogout.setOnClickListener {
             // TODO : 로그아웃 처리 필요
             startActivity(Intent(this, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             })
+        }
+    }
+
+    private fun updateUserProfileInstruction(introduction: String) {
+        val isUpdateDone = UserManager.updateUserIntroduction(userId, introduction)
+        if (isUpdateDone) {
+            updateUserProfile()
+        } else {
+            Toast.makeText(this, getString(R.string.fail_edit_profile), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 

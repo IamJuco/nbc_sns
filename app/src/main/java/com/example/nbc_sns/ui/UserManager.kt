@@ -25,8 +25,17 @@ object UserManager {
         return users.remove(userId) != null
     }
 
-    fun updateUserInfo(userId: String, uri: Uri) {
-        val userInfo = users[userId] ?: return
+    // 사용자의 프로필 사진을 업데이트합니다.
+    fun updateUserThumbnail(userId: String, uri: Uri): Boolean {
+        val userInfo = users[userId] ?: return false
         users[userId] = userInfo.copy(thumbnail = uri)
+        return true
+    }
+
+    // 사용자 소개 문구를 업데이트합니다.
+    fun updateUserIntroduction(userId: String, introduction: String): Boolean {
+        val userInfo = users[userId] ?: return false
+        users[userId] = userInfo.copy(introduction = introduction)
+        return true
     }
 }

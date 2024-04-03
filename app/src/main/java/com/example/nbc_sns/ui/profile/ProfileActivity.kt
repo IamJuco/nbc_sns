@@ -16,6 +16,7 @@ import com.example.nbc_sns.ui.UserManager
 import com.example.nbc_sns.ui.createPost.CreatePostActivity.Companion.BUNDLE_KEY_FOR_USER_ID
 import com.example.nbc_sns.ui.editProfile.EditProfileActivity
 import com.example.nbc_sns.ui.editProfile.EditProfileActivity.Companion.BUNDLE_KEY_FOR_USER_ID_CHECK
+import com.example.nbc_sns.ui.home.MainActivity
 import com.example.nbc_sns.ui.post.PostActivity
 import com.example.nbc_sns.ui.post.PostActivity.Companion.BUNDLE_KEY_FOR_POST_ID_CHECK
 import com.example.nbc_sns.ui.selectImage.SelectImageActivity
@@ -29,7 +30,8 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
         ProfileAdapter(this)
     }
 
-    private val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private val activityResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode != Activity.RESULT_OK) {
                 return@registerForActivityResult
             }
@@ -49,6 +51,7 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
     override fun onClick(postId: Int) {
         startActivity(Intent(this, PostActivity::class.java).apply {
             putExtra(BUNDLE_KEY_FOR_POST_ID_CHECK, postId)
+            putExtra(BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
         })
     }
 
@@ -112,6 +115,8 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
     }
 
     private fun initView() {
+        // TODO : 로그인 여부에 따라 프로필 수정, 게시글 작성, 로그아웃 버튼 visibility 수정 필요
+
         binding.ivThumbnail.clipToOutline = true // xml 설정은 API 30 이하에서 적용되지 않아 코드로 적용해야 함
         userId = "newjeans@gmail.com" // TODO : 다른 화면에서 Intent로 전달한 userId를 이용하도록 수정해야 함
         updateUserProfile()
@@ -127,6 +132,12 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
         binding.btnEditProfile.setOnClickListener {
             activityResultLauncher.launch(Intent(this, EditProfileActivity::class.java).apply {
                 putExtra(BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
+            })
+        }
+        binding.btnLogout.setOnClickListener {
+            // TODO : 로그아웃 처리 필요
+            startActivity(Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             })
         }
     }

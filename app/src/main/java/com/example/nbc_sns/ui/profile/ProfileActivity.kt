@@ -1,23 +1,25 @@
 package com.example.nbc_sns.ui.profile
 
+import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.net.toUri
+import androidx.appcompat.app.AppCompatActivity
 import com.example.nbc_sns.R
 import com.example.nbc_sns.databinding.ActivityProfileBinding
 import com.example.nbc_sns.model.PostImages
 import com.example.nbc_sns.model.UserInfo
 import com.example.nbc_sns.ui.PostManager
 import com.example.nbc_sns.ui.UserManager
+import com.example.nbc_sns.ui.createPost.CreatePostActivity.Companion.BUNDLE_KEY_FOR_USER_ID
+import com.example.nbc_sns.ui.selectImage.SelectImageActivity
 import com.example.nbc_sns.util.getUriToDrawable
 
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
+    private lateinit var userId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
@@ -25,6 +27,20 @@ class ProfileActivity : AppCompatActivity() {
 
         fakeSetting()
         initView()
+        setListener()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        if (intent?.getBooleanExtra(BUNDLE_KEY_FOR_CREATE_POST_CHECK, false) == true) {
+            updateUIAboutPost()
+            return
+        }
+        super.onNewIntent(intent)
+    }
+
+    private fun updateUIAboutPost() {
+        val posts = PostManager.getPost(userId)
+        binding.tvPostCount.text = posts.count().toString()
     }
 
     private fun fakeSetting() {
@@ -58,8 +74,8 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun initView() {
         binding.ivThumbnail.clipToOutline = true // xml 설정은 API 30 이하에서 적용되지 않아 코드로 적용해야 함
-        val id = "newjeans@gmail.com" // TODO : 다른 화면에서 Intent로 전달한 userId를 이용하도록 수정해야 함
-        val userInfo = UserManager.getUser(id) ?: run {
+        userId = "newjeans@gmail.com" // TODO : 다른 화면에서 Intent로 전달한 userId를 이용하도록 수정해야 함
+        val userInfo = UserManager.getUser(userId) ?: run {
             Toast.makeText(this, "유저 정보가 없습니다.", Toast.LENGTH_SHORT).show()
             finish()
             return
@@ -70,5 +86,17 @@ class ProfileActivity : AppCompatActivity() {
         binding.tvNickname.text = userInfo.nickName
         binding.tvIntroduction.text = userInfo.introduction
         binding.tvPostCount.text = posts.count().toString()
+    }
+
+    private fun setListener() {
+        binding.btnCreatePost.setOnClickListener {
+            startActivity(Intent(this, SelectImageActivity::class.java).apply {
+                putExtra(BUNDLE_KEY_FOR_USER_ID, userId)
+            })
+        }
+    }
+
+    companion object {
+        const val BUNDLE_KEY_FOR_CREATE_POST_CHECK = "KEY_FOR_CREATE_POST_CHECK"
     }
 }

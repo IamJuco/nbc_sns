@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.nbc_sns.databinding.ActivityPostBinding
 import com.example.nbc_sns.ui.PostManager
 import com.example.nbc_sns.ui.UserManager
-import com.example.nbc_sns.ui.detail.DetailPageActivity
-import com.example.nbc_sns.ui.home.MainActivity
+import com.example.nbc_sns.ui.profile.ProfileActivity
 
 class PostActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPostBinding
@@ -43,11 +42,8 @@ class PostActivity : AppCompatActivity() {
         // 6. PostContents 적용
         binding.tvPostContent.text = post.postContent
 
-        // 뒤로가기 버튼 클릭 시 메인 화면으로 이동
+        // 뒤로가기 버튼 클릭 시 종료
         binding.btnPrev.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-
             finish()
         }
 
@@ -63,7 +59,8 @@ class PostActivity : AppCompatActivity() {
 
         // 닉네임 클릭 시 디테일 화면으로 이동
         binding.tvNickName.setOnClickListener {
-            val intent = Intent(this, DetailPageActivity::class.java)
+            val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra(ProfileActivity.BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
             startActivity(intent)
         }
 

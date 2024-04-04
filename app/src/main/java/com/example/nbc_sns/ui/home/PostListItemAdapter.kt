@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nbc_sns.databinding.RecyclerviewPostListItemBinding
 import com.example.nbc_sns.model.Post
 import com.example.nbc_sns.ui.UserManager
-import com.example.nbc_sns.ui.detail.DetailPageActivity
+import com.example.nbc_sns.ui.profile.ProfileActivity
 import com.example.nbc_sns.ui.profile.ProfileActivity.Companion.BUNDLE_KEY_FOR_USER_ID_CHECK
 
-class PostListItemAdapter(private val items: MutableList<Post>) :
-    RecyclerView.Adapter<PostListItemAdapter.Holder>() {
+class PostListItemAdapter(
+    private val items: MutableList<Post>,
+    private val imageClickListener: ImageClickListener,
+) : RecyclerView.Adapter<PostListItemAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = RecyclerviewPostListItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+            LayoutInflater.from(parent.context), parent, false
         )
         return Holder(binding)
     }
@@ -40,8 +40,7 @@ class PostListItemAdapter(private val items: MutableList<Post>) :
             var isClickEvent = false
 
             binding.ivProfileItem.setImageURI(userInfo?.thumbnail)
-            binding.ivLargeProfileItem.setImageURI(userInfo!!.thumbnail) // 프로필 확대 이미지 설정
-            binding.tvId.text = item.authorId
+            binding.tvNickname.text = UserManager.getUserNickName(item.authorId)
             val imageUri = item.postImages.uris.first()
             binding.ivPostImage.setImageURI(imageUri) // 이미지 첫번째것 나옴
             binding.tvPostContent.text = item.postContent
@@ -65,19 +64,19 @@ class PostListItemAdapter(private val items: MutableList<Post>) :
 
             // 게시글 유저 프로필 클릭 이벤트
             binding.ivProfileItem.setOnClickListener {
-                binding.ivLargeProfileItem.visibility = View.VISIBLE
+                imageClickListener.click(userInfo?.thumbnail!!)
             }
 
-            // 포스트이미지 확대 이미지 클릭 시 닫기
-            binding.ivLargeProfileItem.setOnClickListener {
-                binding.ivLargeProfileItem.visibility = View.GONE
+            // 게시글 유저 포스트 이미지 클릭 이벤트
+            binding.ivPostImage.setOnClickListener {
+                imageClickListener.click(imageUri)
             }
 
             // 게시글 유저 아이디 클릭 이벤트
-            binding.tvId.setOnClickListener {
+            binding.tvNickname.setOnClickListener {
                 val context = binding.root.context
 
-                val intent = Intent(context, DetailPageActivity::class.java)
+                val intent = Intent(context, ProfileActivity::class.java)
                 intent.putExtra(BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
                 context.startActivity(intent)
             }

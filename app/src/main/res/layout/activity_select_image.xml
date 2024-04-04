@@ -22,6 +22,7 @@
         android:id="@+id/tv_selected_image_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/transparent"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/ib_request_permission"
         app:layout_constraintEnd_toEndOf="@id/ib_request_permission"

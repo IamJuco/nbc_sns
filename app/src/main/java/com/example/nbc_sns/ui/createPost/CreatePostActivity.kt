@@ -1,5 +1,6 @@
 package com.example.nbc_sns.ui.createPost
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -9,6 +10,8 @@ import com.example.nbc_sns.databinding.ActivityCreatePostBinding
 import com.example.nbc_sns.model.PostImages
 import com.example.nbc_sns.model.SelectedImage
 import com.example.nbc_sns.ui.PostManager
+import com.example.nbc_sns.ui.profile.ProfileActivity
+import com.example.nbc_sns.ui.profile.ProfileActivity.Companion.BUNDLE_KEY_FOR_CREATE_POST_CHECK
 
 class CreatePostActivity : AppCompatActivity(), ImageLocationListener {
 
@@ -50,14 +53,17 @@ class CreatePostActivity : AppCompatActivity(), ImageLocationListener {
         } ?: run {
             Toast.makeText(
                 baseContext,
-                getString(R.string.no_image_passed_to_create_post_activity), Toast.LENGTH_LONG
+                getString(R.string.no_image_passed_through_intent), Toast.LENGTH_LONG
             )
                 .show()
             finish()
             return false
         }
-        // TODO : 프로필 화면 만들 때, userId 전달해줘야 함
-        userId = intent.getStringExtra(BUNDLE_KEY_FOR_USER_ID) ?: "temp"
+        userId = intent.getStringExtra(BUNDLE_KEY_FOR_USER_ID) ?: run {
+            Toast.makeText(baseContext, getString(R.string.no_user_id_passed_through_intent), Toast.LENGTH_LONG).show()
+            finish()
+            return false
+        }
         this.selectedImage = selectedImage
         adapter.submitList(selectedImage.images)
         return true
@@ -77,9 +83,10 @@ class CreatePostActivity : AppCompatActivity(), ImageLocationListener {
     private fun setListener() {
         binding.btnSubmit.setOnClickListener {
             PostManager.addPost(binding.editTextContent.text.toString(), PostImages(selectedImage.images.map { it.uri }), userId)
-            // 프로필 화면으로 이동하도록 수정
-            // 프로필 화면 -> 이미지 선택 화면 -> 여기로 이동했기 때문에,
-            // 프로필 화면 start 하면서 backstack에 있는 화면들 지우도록 launchmode 설정하기
+            startActivity(Intent(this, ProfileActivity::class.java).apply {
+                putExtra(BUNDLE_KEY_FOR_CREATE_POST_CHECK, true)
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            })
         }
     }
 

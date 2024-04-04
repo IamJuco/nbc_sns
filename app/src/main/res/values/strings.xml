@@ -8,8 +8,14 @@
     <string name="image_permission_positive">허용</string>
     <string name="submit_post">게시물 등록</string>
     <string name="current_index_from_all">%d / %d</string>
-    <string name="no_image_passed_to_create_post_activity">Activity 실행에 필요한 이미지가 전달되지 않았습니다.</string>
-
-    <!-- recyclerview_post_list_item-->
+    <string name="no_image_passed_through_intent">Activity 실행에 필요한 이미지가 전달되지 않았습니다.</string>
+    <string name="post">게시물</string>
+    <string name="edit_profile_thumbnail">프로필 이미지 변경</string>
+    <string name="write_post">게시물 작성</string>
+    <string name="no_user_id_passed_through_intent">Activity 실행에 필요한 사용자 ID가 전달되지 않았습니다.</string>
+    <string name="logout">로그아웃</string>
+    <string name="edit_profile_introduction">소개 문구 수정</string>
+    <string name="edit_profile_introduction_done">소개 문구 수정 완료</string>
+    <string name="fail_edit_profile">프로필 수정에 실패했습니다.</string>
     <string name="post_more">더 보기</string>
 </resources>

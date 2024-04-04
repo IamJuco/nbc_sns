@@ -5,4 +5,5 @@
     <color name="gray">#30808080</color>
     <color name="purple_red">#E1306C</color>
     <color name="transparentBlack">#5F000000</color>
+    <color name="transparent">#00000000</color>
 </resources>

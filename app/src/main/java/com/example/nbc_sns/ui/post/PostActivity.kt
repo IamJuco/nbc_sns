@@ -3,9 +3,12 @@ package com.example.nbc_sns.ui.post
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.UserManager
+import android.provider.MediaStore.Images.Thumbnails
 import android.view.View
 import com.example.nbc_sns.R
 import com.example.nbc_sns.databinding.ActivityPostBinding
+import com.example.nbc_sns.model.UserInfo
 import com.example.nbc_sns.ui.detail.DetailPageActivity
 import com.example.nbc_sns.ui.home.MainActivity
 
@@ -17,10 +20,28 @@ class PostActivity : AppCompatActivity() {
         binding = ActivityPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // user id, post id 가져오기
+        val userId = intent.getStringExtra(BUNDLE_KEY_FOR_USER_ID_CHECK) ?: ""
+        val postId = intent.getStringExtra(BUNDLE_KEY_FOR_POST_ID_CHECK) ?: ""
+        
+        // Thumbnail 적용
+//        binding.ivThumbnail.setImageResource()
+
+        // NickName 적용
+        binding.tvNickName.text = ""
+
+        // PostImage 적용
+//        binding.ivPostImage.setImageResource()
+
+        // PostContents 적용
+        binding.tvPostContent.text = ""
+
         // 뒤로가기 버튼 클릭 시 메인 화면으로 이동
         binding.btnPrev.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+
+            finish()
         }
 
         // 썸네일 클릭 시 이미지 확대
@@ -48,8 +69,10 @@ class PostActivity : AppCompatActivity() {
         binding.ivEnlargementPostImage.setOnClickListener {
             binding.ivEnlargementPostImage.visibility = View.GONE
         }
-        
-        // 댓글 추가
+    }
 
+    companion object {
+        const val BUNDLE_KEY_FOR_POST_ID_CHECK = "KEY_FOR_POST_ID_CHECK"
+        const val BUNDLE_KEY_FOR_USER_ID_CHECK = "KEY_FOR_USER_ID_CHECK"
     }
 }

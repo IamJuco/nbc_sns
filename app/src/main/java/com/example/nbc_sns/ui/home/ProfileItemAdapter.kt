@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nbc_sns.databinding.RecyclerviewProfileItemBinding
-import com.example.nbc_sns.model.Post
+import com.example.nbc_sns.model.UserInfo
 import com.example.nbc_sns.ui.UserManager
-import com.example.nbc_sns.ui.detail.DetailPageActivity
 import com.example.nbc_sns.ui.profile.ProfileActivity
 
-class ProfileItemAdapter(private val items: MutableList<Post>) : RecyclerView.Adapter<ProfileItemAdapter.Holder>() {
+class ProfileItemAdapter(private val items: MutableList<UserInfo>) : RecyclerView.Adapter<ProfileItemAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = RecyclerviewProfileItemBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -31,8 +30,8 @@ class ProfileItemAdapter(private val items: MutableList<Post>) : RecyclerView.Ad
     inner class Holder(val binding: RecyclerviewProfileItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Post) {
-            val userId = item.authorId
+        fun bind(item: UserInfo) {
+            val userId = item.id
             val userInfo = UserManager.getUser(userId)
 
             binding.rvProfileItem.setImageURI(userInfo?.thumbnail)

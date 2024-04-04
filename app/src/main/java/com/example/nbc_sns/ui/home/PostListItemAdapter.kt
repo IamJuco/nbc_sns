@@ -41,7 +41,7 @@ class PostListItemAdapter(private val items: MutableList<Post>) :
 
             binding.ivProfileItem.setImageURI(userInfo?.thumbnail)
             binding.ivLargeProfileItem.setImageURI(userInfo!!.thumbnail) // 프로필 확대 이미지 설정
-            binding.tvId.text = item.authorId
+            binding.tvNickname.text = UserManager.getUserNickName(item.authorId)
             val imageUri = item.postImages.uris.first()
             binding.ivPostImage.setImageURI(imageUri) // 이미지 첫번째것 나옴
             binding.tvPostContent.text = item.postContent
@@ -74,7 +74,7 @@ class PostListItemAdapter(private val items: MutableList<Post>) :
             }
 
             // 게시글 유저 아이디 클릭 이벤트
-            binding.tvId.setOnClickListener {
+            binding.tvNickname.setOnClickListener {
                 val context = binding.root.context
 
                 val intent = Intent(context, ProfileActivity::class.java)

@@ -41,4 +41,12 @@ object UserManager {
         users[userId] = userInfo.copy(introduction = introduction)
         return true
     }
+
+    fun getAllUser(): List<UserInfo> {
+        return users.values.toList()
+    }
+
+    fun getUserNickName(authorId: String): String {
+        return users[authorId]?.nickName ?: "null"
+    }
 }

@@ -17,4 +17,5 @@
     <string name="edit_profile_introduction">소개 문구 수정</string>
     <string name="edit_profile_introduction_done">소개 문구 수정 완료</string>
     <string name="fail_edit_profile">프로필 수정에 실패했습니다.</string>
+    <string name="post_more">더 보기</string>
 </resources>

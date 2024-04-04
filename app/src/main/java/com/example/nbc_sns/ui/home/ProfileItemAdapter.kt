@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nbc_sns.databinding.RecyclerviewProfileItemBinding
 import com.example.nbc_sns.model.Post
-import com.example.nbc_sns.model.UserInfo
 import com.example.nbc_sns.ui.UserManager
 import com.example.nbc_sns.ui.detail.DetailPageActivity
 import com.example.nbc_sns.ui.profile.ProfileActivity
 
-class ProfileItemAdpater(private val items: MutableList<Post>) : RecyclerView.Adapter<ProfileItemAdpater.Holder>() {
+class ProfileItemAdapter(private val items: MutableList<Post>) : RecyclerView.Adapter<ProfileItemAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = RecyclerviewProfileItemBinding.inflate(
             LayoutInflater.from(parent.context),

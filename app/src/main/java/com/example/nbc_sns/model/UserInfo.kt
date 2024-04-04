@@ -1,6 +1,5 @@
 package com.example.nbc_sns.model
 
-import android.graphics.Bitmap
 import android.net.Uri
 
 // 사용자에 대한 정보를 나타내는 클래스

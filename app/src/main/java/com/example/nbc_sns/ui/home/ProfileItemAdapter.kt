@@ -41,7 +41,7 @@ class ProfileItemAdapter(private val items: MutableList<Post>) : RecyclerView.Ad
             binding.rvProfileItem.setOnClickListener {
                 val context = binding.root.context
 
-                val intent = Intent(context, DetailPageActivity::class.java)
+                val intent = Intent(context, ProfileActivity::class.java)
                 intent.putExtra(ProfileActivity.BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
                 context.startActivity(intent)
             }

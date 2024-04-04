@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nbc_sns.databinding.RecyclerviewPostListItemBinding
 import com.example.nbc_sns.model.Post
 import com.example.nbc_sns.ui.UserManager
-import com.example.nbc_sns.ui.detail.DetailPageActivity
+import com.example.nbc_sns.ui.profile.ProfileActivity
 import com.example.nbc_sns.ui.profile.ProfileActivity.Companion.BUNDLE_KEY_FOR_USER_ID_CHECK
 
 class PostListItemAdapter(private val items: MutableList<Post>) :
@@ -77,7 +77,7 @@ class PostListItemAdapter(private val items: MutableList<Post>) :
             binding.tvId.setOnClickListener {
                 val context = binding.root.context
 
-                val intent = Intent(context, DetailPageActivity::class.java)
+                val intent = Intent(context, ProfileActivity::class.java)
                 intent.putExtra(BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
                 context.startActivity(intent)
             }

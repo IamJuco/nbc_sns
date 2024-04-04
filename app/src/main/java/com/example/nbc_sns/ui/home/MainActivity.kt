@@ -9,7 +9,7 @@ import com.example.nbc_sns.model.PostImages
 import com.example.nbc_sns.model.UserInfo
 import com.example.nbc_sns.ui.PostManager
 import com.example.nbc_sns.ui.UserManager
-import com.example.nbc_sns.ui.detail.DetailPageActivity
+import com.example.nbc_sns.ui.profile.ProfileActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,7 +34,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun onClickMyPage() {
         binding.ivMyPage.setOnClickListener {
-            val intent = Intent(this, DetailPageActivity::class.java)
+            val intent = Intent(this, ProfileActivity::class.java)
+            val userId = UserManager.loggedId
+            intent.putExtra(ProfileActivity.BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
             startActivity(intent)
         }
     }

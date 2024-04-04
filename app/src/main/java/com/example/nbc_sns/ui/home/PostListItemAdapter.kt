@@ -72,8 +72,8 @@ class PostListItemAdapter(private val items: MutableList<Post>) :
                 val intent = Intent(context, DetailPageActivity::class.java)
                 intent.putExtra(BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
                 context.startActivity(intent)
-
             }
         }
+
     }
 }

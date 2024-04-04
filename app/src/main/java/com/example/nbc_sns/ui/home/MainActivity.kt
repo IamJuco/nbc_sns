@@ -17,11 +17,13 @@ import com.example.nbc_sns.util.getUriToDrawable
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         fakeSetting()
@@ -33,13 +35,15 @@ class MainActivity : AppCompatActivity() {
         UserManager.getUser(posts.first().authorId)?.thumbnail
 
         binding.rvPostArea.adapter = PostListItemAdapter(posts)
-        binding.rvPostArea.layoutManager = LinearLayoutManager(this)
+//        binding.rvPostArea.layoutManager = LinearLayoutManager(this)
 
-        binding.rvProfileArea.adapter = ProfileItemAdpater(mutableListOf()) // 임시
-        binding.rvProfileArea.layoutManager = LinearLayoutManager(this)
+        binding.rvProfileArea.adapter = ProfileItemAdpater(posts) // 임시
+//        binding.rvProfileArea.layoutManager = LinearLayoutManager(this)
+
 
         // 임시로 true
-        onClickMyPage(true)
+        val isLogin = true
+        onClickMyPage(isLogin)
 
     }
 

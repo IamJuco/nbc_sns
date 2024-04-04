@@ -1,14 +1,12 @@
 package com.example.nbc_sns.ui.post
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.UserManager
-import android.provider.MediaStore.Images.Thumbnails
 import android.view.View
-import com.example.nbc_sns.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.nbc_sns.databinding.ActivityPostBinding
-import com.example.nbc_sns.model.UserInfo
+import com.example.nbc_sns.ui.PostManager
+import com.example.nbc_sns.ui.UserManager
 import com.example.nbc_sns.ui.detail.DetailPageActivity
 import com.example.nbc_sns.ui.home.MainActivity
 
@@ -21,20 +19,29 @@ class PostActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // user id, post id 가져오기
-        val userId = intent.getStringExtra(BUNDLE_KEY_FOR_USER_ID_CHECK) ?: ""
-        val postId = intent.getStringExtra(BUNDLE_KEY_FOR_POST_ID_CHECK) ?: ""
-        
-        // Thumbnail 적용
-//        binding.ivThumbnail.setImageResource()
+        val userId = intent.getStringExtra(BUNDLE_KEY_FOR_USER_ID_CHECK) ?: "newjeans@gmail.com"
+        val postId = intent.getIntExtra(BUNDLE_KEY_FOR_POST_ID_CHECK, 0)
 
-        // NickName 적용
-        binding.tvNickName.text = ""
+        // 1. userId를 이용해서 UserManager에서 userInfo를 가져오기
+        val userInfo = UserManager.getUser(userId)!! // userId에 해당하는 UserInfo가 있다고 가정
 
-        // PostImage 적용
-//        binding.ivPostImage.setImageResource()
+        // 2. 가져 온 userInfo를 이용해서 thumbnail 적용하기
+        binding.ivThumbnail.setImageURI(userInfo.thumbnail)
+        binding.ivEnlargementThumbnail.setImageURI(userInfo.thumbnail)
 
-        // PostContents 적용
-        binding.tvPostContent.text = ""
+        // 3. NickName 적용
+        binding.tvNickName.text = userInfo.nickName
+
+        // 4. postId를 이용해서 PostManager에서 Post 가져오기
+        val post = PostManager.getSpecificPost(userId, postId)!! // postId에 해당하는 Post가 있다고 가정
+
+        // 5. PostImage 적용
+        val firstImageUri = post.postImages.uris.first()
+        binding.ivPostImage.setImageURI(firstImageUri)
+        binding.ivEnlargementPostImage.setImageURI(firstImageUri)
+
+        // 6. PostContents 적용
+        binding.tvPostContent.text = post.postContent
 
         // 뒤로가기 버튼 클릭 시 메인 화면으로 이동
         binding.btnPrev.setOnClickListener {

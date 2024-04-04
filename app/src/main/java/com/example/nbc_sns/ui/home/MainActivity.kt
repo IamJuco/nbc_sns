@@ -2,8 +2,6 @@ package com.example.nbc_sns.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.graphics.drawable.toBitmap
 import com.example.nbc_sns.R
 import com.example.nbc_sns.model.PostImages
 import com.example.nbc_sns.model.UserInfo
@@ -24,14 +22,8 @@ class MainActivity : AppCompatActivity() {
         // TODO : 기본 사용자 4명, 각 사용자마다 게시물 5개 만들어주세요.
         val newJeans = UserInfo(
             id = "newjeans@gmail.com",
-            pw = "defaultPassWord!", // TODO : 패스워드 규칙에 맞게 수정해주세요.
-            nickName = "newjeans_official",
-            thumbnail = AppCompatResources.getDrawable(
-                baseContext,
-                R.drawable.new_jeans_thumbnail
-            )!!.toBitmap(),
-            introduction = "최고의 토론만을 펼치는 엉망잔칭 토론클럽입니다.\n" +
-                    "매년 엉망잔칭 토론회를 주최하고 있습니다.\n"
+            pw = "defaultPassWord!"
+            // TODO : 패스워드 규칙에 맞게 수정해주세요.
         )
         UserManager.register(newJeans)
         // 사용자 기본 게시물 입력

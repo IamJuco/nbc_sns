@@ -1,24 +1,31 @@
-package com.example.nbc_sns.login
+package com.example.nbc_sns.ui.login
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nbc_sns.R
 import com.example.nbc_sns.UserManager
+import com.example.nbc_sns.UserManager.register
 import com.example.nbc_sns.databinding.ActivityLogInBinding
 import com.example.nbc_sns.model.UserInfo
+//import com.example.nbc_sns.ui.home.MainActivity
+import com.example.nbc_sns.ui.register.RegisterActivity
 
 class LogInActivity : AppCompatActivity() {
 
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+
     private lateinit var binding: ActivityLogInBinding
+
+    private var isEnglish = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLogInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        var isEnglish = false
 
         binding.btnEng.setOnClickListener {
 
@@ -32,18 +39,25 @@ class LogInActivity : AppCompatActivity() {
             val login = if (isEnglish) R.string.login else R.string.login1
             val register = if (isEnglish) R.string.register else R.string.register1
 
-            intent.getStringExtra("id") ?: ""
-            intent.getStringExtra("pw") ?: ""
-
             binding.etEmail.hint = getString(putEmail)
             binding.etPw.hint = getString(putPassword)
             binding.btnLogin.text = getString(login)
             binding.btnRegister.text = getString(register)
         }
 
+        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { result ->
+            if (result.resultCode == RESULT_OK) {
+                val id = result.data?.getStringExtra("id") ?: ""
+                val pw = result.data?.getStringExtra("pw") ?: ""
+            }
+        }
+
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val pw = binding.etPw.text.toString()
+            val userInfo = UserInfo(email, pw, nickName = null)
+            val loginSuccess = register(userInfo)
 
             if (email.isNullOrBlank() || pw.isNullOrBlank()) {
                 Toast.makeText(this, "아이디와 비밀번호를 확인해 주세요", Toast.LENGTH_SHORT).show()
@@ -54,23 +68,14 @@ class LogInActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            fun register(userInfo: UserInfo): Boolean {
-                val idExists = userInfo.id in UserManager.users
-                val nicknameExists = userInfo.nickName in UserManager.users
+            if (loginSuccess) {
+                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
 
-                if (idExists && nicknameExists) {
-                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                    // 임시로 Main 대신 RegisterActivity 이동
-                    val intent = Intent(this, RegisterActivity::class.java)
-                    intent.putExtra("id", "")
-                    intent.putExtra("pw", "")
-                    startActivity(intent)
-                    return true
-
-                } else {
-                    Toast.makeText(this, "등록되지 않은 사용자입니다", Toast.LENGTH_SHORT).show()
-                    return false
-                }
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("id", email)
+                intent.putExtra("pw", pw)
+                startActivity(intent)
             }
         }
 

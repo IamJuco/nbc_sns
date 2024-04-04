@@ -1,4 +1,4 @@
-package com.example.nbc_sns.login
+package com.example.nbc_sns.ui.register
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,10 +7,14 @@ import android.widget.Toast
 import com.example.nbc_sns.R
 import com.example.nbc_sns.UserManager.register
 import com.example.nbc_sns.databinding.ActivityRegisterBinding
+import com.example.nbc_sns.model.UserInfo
+import com.example.nbc_sns.ui.login.LogInActivity
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+
+    private var isEnglish = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +25,6 @@ class RegisterActivity : AppCompatActivity() {
             val intent = Intent(this, LogInActivity::class.java)
             startActivity(intent)
         }
-
-        var isEnglish = false
 
         binding.btnEng.setOnClickListener {
 
@@ -44,6 +46,7 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.btnRegister.setOnClickListener {
             val name = binding.etName.text.toString()
+            val nickName = binding.etName.text.toString()
             val id = binding.etEmail.text.toString()
             val pw = binding.etPw.text.toString()
             val rePw = binding.etRePw.text.toString()
@@ -64,20 +67,14 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "입력되지 않은 정보가 있습니다", Toast.LENGTH_SHORT).show()
 
                 else -> {
-                    val userInfo = com.example.nbc_sns.model.UserInfo(
-                        id, pw, "", null, ""
-                    )
-
+                    val userInfo = UserInfo(id, pw, nickName)
                     val registerSuccess = register(userInfo)
 
                     if (registerSuccess) {
                         Toast.makeText(this, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show()
 
-                        val intent = Intent(this, LogInActivity::class.java)
                         intent.putExtra("id", id)
                         intent.putExtra("pw", pw)
-                        startActivity(intent)
-
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                         finish()
 

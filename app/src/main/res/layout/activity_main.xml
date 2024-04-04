@@ -63,4 +63,18 @@
         app:layout_constraintTop_toBottomOf="@+id/v_horizontal_line"
         tools:listitem="@layout/recyclerview_post_list_item" />
 
+    <ImageView
+        android:id="@+id/iv_large_profileItem"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/transparentBlack"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_launcher_background"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/new_jeans_thumbnail" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

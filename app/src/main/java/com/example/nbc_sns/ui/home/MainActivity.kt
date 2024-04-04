@@ -1,7 +1,9 @@
 package com.example.nbc_sns.ui.home
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nbc_sns.databinding.ActivityMainBinding
 import com.example.nbc_sns.ui.PostManager
@@ -10,12 +12,17 @@ import com.example.nbc_sns.ui.profile.ProfileActivity
 import com.example.nbc_sns.util.insertDummyData
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ImageClickListener {
 
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
     private val random = Random(System.currentTimeMillis())
+
+    override fun click(uri: Uri) {
+        binding.ivLargeProfileItem.setImageURI(uri)
+        binding.ivLargeProfileItem.visibility = View.VISIBLE
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,12 +33,15 @@ class MainActivity : AppCompatActivity() {
         posts.shuffle(random)
         UserManager.getUser(posts.first().authorId)?.thumbnail
 
-        binding.rvPostArea.adapter = PostListItemAdapter(posts)
+        binding.rvPostArea.adapter = PostListItemAdapter(posts, this)
 
         val allUsers = UserManager.getAllUser().toMutableList()
         allUsers.shuffle(random)
         binding.rvProfileArea.adapter = ProfileItemAdapter(allUsers)
 
+        binding.ivLargeProfileItem.setOnClickListener {
+            binding.ivLargeProfileItem.visibility = View.GONE
+        }
         onClickMyPage()
     }
 

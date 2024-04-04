@@ -34,7 +34,7 @@
         android:scaleType="centerInside"
         android:translationZ="1dp"
         android:visibility="gone"
-        android:background="@color/white"
+        android:background="@color/transparentBlack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,13 +69,12 @@
         android:scaleType="centerInside"
         android:translationZ="1dp"
         android:visibility="gone"
-        android:background="@color/white"
+        android:background="@color/transparentBlack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/new_jeans_sample_post_image" />
-
 
     <TextView
         android:id="@+id/tvPostContent"

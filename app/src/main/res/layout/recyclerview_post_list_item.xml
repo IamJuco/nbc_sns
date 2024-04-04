@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,8 +9,8 @@
         android:id="@+id/cardView"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:cardCornerRadius="360dp"
         android:layout_margin="5dp"
+        app:cardCornerRadius="360dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -51,26 +50,41 @@
         android:id="@+id/tv_postContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText"
+        android:layout_margin="5dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:layout_margin="5dp"
         app:layout_constraintEnd_toStartOf="@id/btn_seeMore"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_postImage" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_postImage"
+        tools:text="TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_seeMore"
         android:layout_width="70dp"
         android:layout_height="20dp"
+        android:background="@android:color/transparent"
         android:text="@string/post_more"
+        android:textColor="#999999"
         android:textSize="8sp"
         android:textStyle="bold"
-        android:textColor="#999999"
-        android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_postContent" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_postContent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <ImageView
+        android:id="@+id/iv_large_profileItem"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/transparentBlack"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:visibility="gone"
+        tools:src="@drawable/new_jeans_thumbnail" />
 
     <!-- visible  뷰타입을 지정해서 다른 뷰 -->
 </androidx.constraintlayout.widget.ConstraintLayout>

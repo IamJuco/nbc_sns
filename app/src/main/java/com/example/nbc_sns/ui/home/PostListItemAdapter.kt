@@ -3,6 +3,7 @@ package com.example.nbc_sns.ui.home
 import android.content.Intent
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nbc_sns.databinding.RecyclerviewPostListItemBinding
@@ -39,10 +40,12 @@ class PostListItemAdapter(private val items: MutableList<Post>) :
             var isClickEvent = false
 
             binding.ivProfileItem.setImageURI(userInfo?.thumbnail)
+            binding.ivLargeProfileItem.setImageURI(userInfo!!.thumbnail) // 프로필 확대 이미지 설정
             binding.tvId.text = item.authorId
-            binding.ivPostImage.setImageURI(item.postImages.uris.first()) // 이미지 첫번째것 나옴
+            val imageUri = item.postImages.uris.first()
+            binding.ivPostImage.setImageURI(imageUri) // 이미지 첫번째것 나옴
             binding.tvPostContent.text = item.postContent
-            binding.tvPostContent.maxLines = 2
+            binding.tvPostContent.maxLines = 2 // ViewHolder가 재사용될 때마다, 이전에 더보기를 누른 것이 초기화(더보기를 누르지 않은 상태로)된다.
             binding.tvPostContent.ellipsize = TextUtils.TruncateAt.END
 
             // 더 보기 클릭 이벤트
@@ -62,7 +65,12 @@ class PostListItemAdapter(private val items: MutableList<Post>) :
 
             // 게시글 유저 프로필 클릭 이벤트
             binding.ivProfileItem.setOnClickListener {
+                binding.ivLargeProfileItem.visibility = View.VISIBLE
+            }
 
+            // 포스트이미지 확대 이미지 클릭 시 닫기
+            binding.ivLargeProfileItem.setOnClickListener {
+                binding.ivLargeProfileItem.visibility = View.GONE
             }
 
             // 게시글 유저 아이디 클릭 이벤트

@@ -2,7 +2,6 @@ package com.example.nbc_sns.ui
 
 import com.example.nbc_sns.model.Post
 import com.example.nbc_sns.model.PostImages
-
 object PostManager {
 
     private val posts: HashMap<String, List<Post>> = hashMapOf() // key: userId, value: Set<Post>
@@ -27,12 +26,14 @@ object PostManager {
         return null
     }
 
+    // 게시물이 전부 필요하면 호출
     fun getAllPosts(): List<Post> {
         return posts.values.fold(listOf()) { acc, posts ->
             acc + posts
         }
     }
 
+    // 특정 유저가 가진 게시물 필요하면 호출
     fun getPost(userId: String): List<Post> {
         return posts[userId]?.toList() ?: emptyList()
     }

@@ -33,12 +33,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".ui.createPost.CreatePostActivity"
             android:exported="false" />
         <activity
             android:name=".ui.selectImage.SelectImageActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".ui.post.PostActivity"
             android:exported="false" />
@@ -47,7 +50,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.home.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -20,6 +20,7 @@ import com.example.nbc_sns.R
 import com.example.nbc_sns.databinding.ActivitySelectImageBinding
 import com.example.nbc_sns.model.SelectedImage
 import com.example.nbc_sns.ui.createPost.CreatePostActivity
+import com.example.nbc_sns.ui.createPost.CreatePostActivity.Companion.BUNDLE_KEY_FOR_USER_ID
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Date
 
@@ -27,6 +28,7 @@ import java.util.Date
 class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
 
     private lateinit var binding: ActivitySelectImageBinding
+    private lateinit var userId: String
     private val galleryAdapter by lazy {
         GalleryAdapter(this)
     }
@@ -66,8 +68,20 @@ class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
         binding = ActivitySelectImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (extractUserIdFromIntent().not()) {
+            return
+        }
         setRecyclerView()
         setListener()
+    }
+
+    private fun extractUserIdFromIntent(): Boolean {
+        userId = intent.getStringExtra(BUNDLE_KEY_FOR_USER_ID) ?: run {
+            Toast.makeText(baseContext, getString(R.string.no_user_id_passed_through_intent), Toast.LENGTH_LONG).show()
+            finish()
+            return false
+        }
+        return true
     }
 
     private fun setRecyclerView() {
@@ -83,6 +97,7 @@ class SelectImageActivity : AppCompatActivity(), GalleryItemSelectListener {
             val selectedImage = SelectedImage(selectedImageAdapter.currentList)
             val intent = Intent(this, CreatePostActivity::class.java).apply {
                 putExtra(CreatePostActivity.BUNDLE_KEY_FOR_CREATE_POST_IMAGE, selectedImage)
+                putExtra(BUNDLE_KEY_FOR_USER_ID, userId)
             }
             startActivity(intent)
         }

@@ -1,10 +1,14 @@
 package com.example.nbc_sns.ui
 
+import android.net.Uri
 import com.example.nbc_sns.model.UserInfo
 
 object UserManager {
 
     private val users: HashMap<String, UserInfo> = hashMapOf() // Key: UserId , value: UserInfo
+
+    var isLogin: Boolean = false
+    var loggedId: String = "newjeans@gmail.com"
 
     fun getUser(userId: String): UserInfo? {
         return users[userId]
@@ -22,5 +26,27 @@ object UserManager {
     // 존재하지 않는 회원에 대해 회원 탈퇴를 시도할 경우 false, 아니면  true를 반환함
     fun unregister(userId: String): Boolean {
         return users.remove(userId) != null
+    }
+
+    // 사용자의 프로필 사진을 업데이트합니다.
+    fun updateUserThumbnail(userId: String, uri: Uri): Boolean {
+        val userInfo = users[userId] ?: return false
+        users[userId] = userInfo.copy(thumbnail = uri)
+        return true
+    }
+
+    // 사용자 소개 문구를 업데이트합니다.
+    fun updateUserIntroduction(userId: String, introduction: String): Boolean {
+        val userInfo = users[userId] ?: return false
+        users[userId] = userInfo.copy(introduction = introduction)
+        return true
+    }
+
+    fun getAllUser(): List<UserInfo> {
+        return users.values.toList()
+    }
+
+    fun getUserNickName(authorId: String): String {
+        return users[authorId]?.nickName ?: "null"
     }
 }

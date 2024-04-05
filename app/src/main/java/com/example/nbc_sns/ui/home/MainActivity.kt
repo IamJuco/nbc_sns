@@ -1,45 +1,56 @@
 package com.example.nbc_sns.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import com.example.nbc_sns.R
-import com.example.nbc_sns.model.PostImages
-import com.example.nbc_sns.model.UserInfo
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import com.example.nbc_sns.databinding.ActivityMainBinding
 import com.example.nbc_sns.ui.PostManager
 import com.example.nbc_sns.ui.UserManager
-import com.example.nbc_sns.util.getUriToDrawable
+import com.example.nbc_sns.ui.profile.ProfileActivity
+import com.example.nbc_sns.util.insertDummyData
+import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : AppCompatActivity(), ImageClickListener {
 
-        createInitData()
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+    private val random = Random(System.currentTimeMillis())
+
+    override fun click(uri: Uri) {
+        binding.ivLargeProfileItem.setImageURI(uri)
+        binding.ivLargeProfileItem.visibility = View.VISIBLE
     }
 
-    private fun createInitData() {
-        // 사용자 기본 정보 입력
-        // TODO : 기본 사용자 4명, 각 사용자마다 게시물 5개 만들어주세요.
-        val newJeans = UserInfo(
-            id = "newjeans@gmail.com",
-            pw = "defaultPassWord!"
-            // TODO : 패스워드 규칙에 맞게 수정해주세요.
-        )
-        UserManager.register(newJeans)
-        // 사용자 기본 게시물 입력
-        PostManager.addPost(
-            "[엉망잔칭 토론클럽]\n" +
-                    "\n" +
-                    "닭이 먼저다 vs 달걀이 먼저다\n" +
-                    "여러분의 의견은 어떠신가요?\n" +
-                    "\n" +
-                    "#엉망잔칭토론클럽 #엉망잔칭토론회",
-            PostImages(
-                listOf(
-                    getUriToDrawable(baseContext, R.drawable.new_jeans_sample_post_image)
-                )
-            ),
-            newJeans.id,
-        )
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        insertDummyData()
+        val posts = PostManager.getAllPosts().toMutableList() // Post가 리스트형태라서 mutableList로
+        posts.shuffle(random)
+        UserManager.getUser(posts.first().authorId)?.thumbnail
+
+        binding.rvPostArea.adapter = PostListItemAdapter(posts, this)
+
+        val allUsers = UserManager.getAllUser().toMutableList()
+        allUsers.shuffle(random)
+        binding.rvProfileArea.adapter = ProfileItemAdapter(allUsers)
+
+        binding.ivLargeProfileItem.setOnClickListener {
+            binding.ivLargeProfileItem.visibility = View.GONE
+        }
+        onClickMyPage()
+    }
+
+    private fun onClickMyPage() {
+        binding.ivMyPage.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            val userId = UserManager.loggedId
+            intent.putExtra(ProfileActivity.BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
+            startActivity(intent)
+        }
     }
 }

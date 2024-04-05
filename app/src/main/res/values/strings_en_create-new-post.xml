@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="hello_friends">안녕 친구들!\\n\\n #Good #좋아요</string>
+    <string name="create_post">게시물 등록</string>
+</resources>

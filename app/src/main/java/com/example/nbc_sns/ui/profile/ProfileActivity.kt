@@ -135,7 +135,7 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
                 updateUserProfileInstruction(editedText)
             } else {
                 binding.btnEditProfileIntroduction.text =
-                    getString(R.string.edit_profile_introduction_done)
+                    getString(R.string)
                 binding.edtIntroduction.setText(binding.tvIntroduction.text)
                 binding.edtIntroduction.visibility = View.VISIBLE
                 binding.tvIntroduction.visibility = View.INVISIBLE

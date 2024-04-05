@@ -45,7 +45,7 @@
         app:layout_constraintTop_toTopOf="@id/guideline"
         tools:text="안녕 친구들!\n\n #Good #좋아요" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_submit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

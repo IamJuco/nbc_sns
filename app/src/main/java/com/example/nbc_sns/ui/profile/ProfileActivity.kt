@@ -33,7 +33,10 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
                 // 앱이 지속되는 동안 uri를 통한 이미지 접근 권한을 부여 받음
                 // 앱이 종료된 후 다시 시작되면 해당 uri에 대한 접근 권한이 완전히 사라지므로, 사용자 프로필 변경 작업을 앱이 재시작하더라도 유지되게 refactoring할 때
                 // uri를 이용해 불러온 이미지를 앱에 할당된 저장 공간에 저장한 후, 해당 uri로 변환해야 함
-                contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                contentResolver.takePersistableUriPermission(
+                    uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
                 updateUserProfileImage(uri)
             }
         }
@@ -85,8 +88,17 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
     }
 
     private fun initView() {
-        // TODO : 로그인 여부에 따라 프로필 수정, 게시글 작성, 로그아웃 버튼 visibility 수정 필요
-
+        if (!UserManager.isLogin) {
+            binding.btnEditProfileThumbnail.visibility = View.VISIBLE
+            binding.btnCreatePost.visibility = View.VISIBLE
+            binding.btnLogout.visibility = View.VISIBLE
+            binding.btnEditProfileIntroduction.visibility = View.VISIBLE
+        } else {
+            binding.btnEditProfileThumbnail.visibility = View.GONE
+            binding.btnCreatePost.visibility = View.GONE
+            binding.btnLogout.visibility = View.GONE
+            binding.btnEditProfileIntroduction.visibility = View.GONE
+        }
         binding.ivThumbnail.clipToOutline = true // xml 설정은 API 30 이하에서 적용되지 않아 코드로 적용해야 함
         userId = intent.getStringExtra(BUNDLE_KEY_FOR_USER_ID_CHECK) ?: run {
             Toast.makeText(this, "유저 정보가 없습니다.", Toast.LENGTH_SHORT).show()
@@ -143,8 +155,8 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
             isEditIntroduction = !isEditIntroduction
         }
         binding.btnLogout.setOnClickListener {
-            // TODO : 로그아웃 처리 필요
             startActivity(Intent(this, MainActivity::class.java).apply {
+                UserManager.isLogin = false
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             })
         }

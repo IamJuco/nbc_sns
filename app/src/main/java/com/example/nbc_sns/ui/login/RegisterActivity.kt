@@ -34,18 +34,18 @@ class RegisterActivity : AppCompatActivity() {
             val isPasswordValid = pw.length >= 8
 
             when {
+                listOf(name, id, pw, rePw).any { it.isBlank() } -> Toast.makeText(
+                    this,
+                    "입력되지 않은 정보가 있습니다",
+                    Toast.LENGTH_SHORT
+                ).show()
+
                 !isEmailValid -> Toast.makeText(this, "유효한 이메일을 입력해 주세요", Toast.LENGTH_SHORT).show()
 
                 !isPasswordValid -> Toast.makeText(this, "비밀번호는 8자 이상이어야 합니다", Toast.LENGTH_SHORT)
                     .show()
 
                 pw != rePw -> Toast.makeText(this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
-
-                listOf(name, id, pw, rePw).any { it.isNullOrBlank() } -> Toast.makeText(
-                    this,
-                    "입력되지 않은 정보가 있습니다",
-                    Toast.LENGTH_SHORT
-                ).show()
 
                 else -> {
                     val userInfo = UserInfo(id, pw, name, null, "")

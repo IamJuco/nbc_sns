@@ -24,7 +24,7 @@ class LogInActivity : AppCompatActivity() {
             val userInfo = UserManager.getUser(email)
 
             if (email.isBlank() || pw.isBlank()) {
-                Toast.makeText(this, getString(R.string.confirm_email), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "아이디와 비밀번호를 확인해 주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
 
             } else if (pw.length < 8) {

@@ -8,29 +8,22 @@
 
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:padding="5dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_myPage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:padding="5dp"
         android:src="@drawable/baseline_person_48"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/rv_profileArea"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_profileArea"
@@ -47,7 +40,7 @@
         android:id="@+id/v_horizontal_line"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:background="@color/black"
+        android:background="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rv_profileArea" />

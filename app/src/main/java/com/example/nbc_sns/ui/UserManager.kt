@@ -7,8 +7,8 @@ object UserManager {
 
     private val users: HashMap<String, UserInfo> = hashMapOf() // Key: UserId , value: UserInfo
 
-    var isLogin: Boolean = false
-    var loggedId: String = ""
+    var isLogin: Boolean = true
+    var loggedId: String = "newjeans@gmail.com"
 
     fun getUser(userId: String): UserInfo? {
         return users[userId]

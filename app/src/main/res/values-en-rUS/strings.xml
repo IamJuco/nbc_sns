@@ -2,11 +2,6 @@
 <resources>
     <string name="app_name">nbc_sns</string>
     <string name="post_content">Post content</string>
-    <string name="login1">Log In</string>
-    <string name="register1">Register</string>
-    <string name="put_email1">Enter your email</string>
-    <string name="name1">Name(Nickname)</string>
-    <string name="put_name1">Enter your Name(Nickname)</string>
     <string name="exceed_max_available_count">Only a maximum of %d images can be selected.</string>
     <string name="image_permission_title">Image permission information</string>
     <string name="image_permission_message">Storage permission is required to access images in the gallery</string>
@@ -20,29 +15,16 @@
     <string name="edit_profile_introduction">Edit introductory text</string>
     <string name="fail_edit_profile">Failed to edit profile</string>
     <string name="post_more">See more</string>
-    <string name="email1">ID(email)</string>
-    <string name="put_ID_email1">"Enter ID(email) "</string>
-    <string name="password1">Password</string>
-    <string name="put_password1">Enter your password</string>
-    <string name="put_re_password1">Enter your password again</string>
-    <string name="confirm_email1">Confirm ID and Password</string>
-    <string name="login_succeed1">Log-in succeed</string>
-    <string name="valid_email1">Please enter a valid email</string>
-    <string name="password_length1">Password must be at least 8 characters long</string>
-    <string name="information1">There is information that has not been entered</string>
-    <string name="password_match1">Passwords do not match</string>
-    <string name="unregistered_email1">This email is not registered</string>
     <string name="no_user_id_passed_through_intent">The image required to run the Activity was not passed</string>
-    <string name="hello_friends">Hello Friends!\\n\\n #Good #좋아요</string>
     <string name="intro_word">" This is a massy debate club that holds only the best debates. \\nEvery year we host a massy debate. This is a massy debate club that holds only the best debates. Every year we host a massy debate."</string>
     <string name="logout">Log out</string>
     <string name="intro_word_edit">Introduction text has been modified</string>
     <string name="nickname">Nickname</string>
-    <string name="create_post">create new post</string>
     <string name="login">Log In</string>
     <string name="register">Register</string>
     <string name="put_email">Enter email</string>
     <string name="put_name">Enter Name</string>
+    <string name="name">name(nickname)</string>
     <string name="email">ID(email)</string>
     <string name="put_ID_email">Enter ID(email)</string>
     <string name="password">Password</string>
@@ -58,4 +40,10 @@
     <string name="password_match">Passwords do not match</string>
     <string name="Sign_up_complete">Sign up is complete</string>
     <string name="user_exists">This user already exists</string>
+    <string name="text_for_selected_image">%d/%d</string>
+    <string name="no_image_passed_through_intent">No Image Passed to start activity</string>
+    <string name="edit_profile_introduction_done">Edit Done</string>
+    <string name="select_image">Select Done</string>
+    <string name="logo_name">INSTAR-GRAM</string>
+    <string name="back">back</string>
 </resources>

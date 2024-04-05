@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:backgroundTint="@color/black"
-        android:text="프로필 이미지 변경"
+        android:text="@string/edit_profile_thumbnail"
         app:layout_constraintEnd_toStartOf="@id/btn_edit_profile_introduction"
         app:layout_constraintStart_toStartOf="@id/tv_introduction"
         app:layout_constraintTop_toBottomOf="@id/tv_introduction" />

@@ -1,20 +1,17 @@
 package com.example.nbc_sns.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.nbc_sns.R
 import com.example.nbc_sns.databinding.ActivityRegisterBinding
 import com.example.nbc_sns.model.UserInfo
 import com.example.nbc_sns.ui.UserManager
-import java.util.jar.Attributes
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-
-    private var isEnglish = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,24 +21,6 @@ class RegisterActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             val intent = Intent(this, LogInActivity::class.java)
             startActivity(intent)
-        }
-
-        binding.btnEng.setOnClickListener {
-
-            isEnglish = !isEnglish
-
-            val putName = if (isEnglish) R.string.put_name else R.string.put_name1
-            val putEmail = if (isEnglish) R.string.put_email else R.string.put_email1
-            val putPassword = if (isEnglish) R.string.put_password else R.string.put_password1
-            val putRePassword =
-                if (isEnglish) R.string.put_re_password else R.string.put_re_password1
-            val register = if (isEnglish) R.string.register else R.string.register1
-
-            binding.etName.hint = getString(putName)
-            binding.etEmail.hint = getString(putEmail)
-            binding.etPw.hint = getString(putPassword)
-            binding.etRePw.hint = getString(putRePassword)
-            binding.btnRegister.text = getString(register)
         }
 
         binding.btnRegister.setOnClickListener {
@@ -55,18 +34,18 @@ class RegisterActivity : AppCompatActivity() {
             val isPasswordValid = pw.length >= 8
 
             when {
+                listOf(name, id, pw, rePw).any { it.isBlank() } -> Toast.makeText(
+                    this,
+                    "입력되지 않은 정보가 있습니다",
+                    Toast.LENGTH_SHORT
+                ).show()
+
                 !isEmailValid -> Toast.makeText(this, "유효한 이메일을 입력해 주세요", Toast.LENGTH_SHORT).show()
 
                 !isPasswordValid -> Toast.makeText(this, "비밀번호는 8자 이상이어야 합니다", Toast.LENGTH_SHORT)
                     .show()
 
                 pw != rePw -> Toast.makeText(this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
-
-                listOf(name, id, pw, rePw).any { it.isNullOrBlank() } -> Toast.makeText(
-                    this,
-                    "입력되지 않은 정보가 있습니다",
-                    Toast.LENGTH_SHORT
-                ).show()
 
                 else -> {
                     val userInfo = UserInfo(id, pw, name, null, "")

@@ -17,6 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nbc_sns"
         tools:targetApi="31">
+
+        <activity
+            android:name="com.example.nbc_sns.ui.login.RegisterActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.example.nbc_sns.ui.login.LogInActivity"
+            android:exported="false" />
+
         <activity
             android:name=".ui.profile.ProfileActivity"
             android:exported="false"

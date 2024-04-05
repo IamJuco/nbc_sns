@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.nbc_sns.databinding.ActivityMainBinding
 import com.example.nbc_sns.ui.PostManager
 import com.example.nbc_sns.ui.UserManager
+import com.example.nbc_sns.ui.login.LogInActivity
+import com.example.nbc_sns.ui.login.RegisterActivity
 import com.example.nbc_sns.ui.profile.ProfileActivity
 import com.example.nbc_sns.util.insertDummyData
 import kotlin.random.Random
@@ -46,11 +48,16 @@ class MainActivity : AppCompatActivity(), ImageClickListener {
     }
 
     private fun onClickMyPage() {
-        binding.ivMyPage.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            val userId = UserManager.loggedId
-            intent.putExtra(ProfileActivity.BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
-            startActivity(intent)
+        binding.ivMyPage.setOnClickListener{
+            if (UserManager.isLogin) {
+                val intent = Intent(this, ProfileActivity::class.java)
+                val userId = UserManager.loggedId
+                intent.putExtra(ProfileActivity.BUNDLE_KEY_FOR_USER_ID_CHECK, userId)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this, LogInActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 }

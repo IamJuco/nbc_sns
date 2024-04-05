@@ -36,7 +36,7 @@ class LogInActivity : AppCompatActivity() {
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainActivity::class.java)
                 UserManager.isLogin = true
-                UserManager.loggedId = UserManager.getUser(email).toString()
+                UserManager.loggedId = email
                 startActivity(intent)
 
             } else {

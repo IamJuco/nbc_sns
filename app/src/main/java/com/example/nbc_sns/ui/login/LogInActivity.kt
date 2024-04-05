@@ -7,12 +7,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nbc_sns.R
-import com.example.nbc_sns.UserManager
-import com.example.nbc_sns.UserManager.register
 import com.example.nbc_sns.databinding.ActivityLogInBinding
-import com.example.nbc_sns.model.UserInfo
-//import com.example.nbc_sns.ui.home.MainActivity
-import com.example.nbc_sns.ui.register.RegisterActivity
+import com.example.nbc_sns.ui.home.MainActivity
 
 class LogInActivity : AppCompatActivity() {
 
@@ -56,10 +52,9 @@ class LogInActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val pw = binding.etPw.text.toString()
-            val userInfo = UserInfo(email, pw, nickName = null)
-            val loginSuccess = register(userInfo)
+            val userInfo = com.example.nbc_sns.ui.UserManager.getUser(email)
 
-            if (email.isNullOrBlank() || pw.isNullOrBlank()) {
+            if (email.isBlank() || pw.isBlank()) {
                 Toast.makeText(this, "아이디와 비밀번호를 확인해 주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
 
@@ -68,14 +63,14 @@ class LogInActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (loginSuccess) {
+            if (userInfo != null && userInfo.pw == pw) {
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("id", email)
                 intent.putExtra("pw", pw)
                 startActivity(intent)
+            } else {
+                Toast.makeText(this, "회원정보를 찾을 수 없습니다", Toast.LENGTH_SHORT).show()
             }
         }
 

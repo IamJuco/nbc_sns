@@ -1,14 +1,14 @@
-package com.example.nbc_sns.ui.register
+package com.example.nbc_sns.ui.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.nbc_sns.R
-import com.example.nbc_sns.UserManager.register
 import com.example.nbc_sns.databinding.ActivityRegisterBinding
 import com.example.nbc_sns.model.UserInfo
-import com.example.nbc_sns.ui.login.LogInActivity
+import com.example.nbc_sns.ui.UserManager
+import java.util.jar.Attributes
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -46,7 +46,6 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.btnRegister.setOnClickListener {
             val name = binding.etName.text.toString()
-            val nickName = binding.etName.text.toString()
             val id = binding.etEmail.text.toString()
             val pw = binding.etPw.text.toString()
             val rePw = binding.etRePw.text.toString()
@@ -67,8 +66,8 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "입력되지 않은 정보가 있습니다", Toast.LENGTH_SHORT).show()
 
                 else -> {
-                    val userInfo = UserInfo(id, pw, nickName)
-                    val registerSuccess = register(userInfo)
+                    val userInfo = UserInfo(id, pw, name, null, "")
+                    val registerSuccess = UserManager.register(userInfo)
 
                     if (registerSuccess) {
                         Toast.makeText(this, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show()

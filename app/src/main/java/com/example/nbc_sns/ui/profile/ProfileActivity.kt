@@ -30,6 +30,10 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
+                // 앱이 지속되는 동안 uri를 통한 이미지 접근 권한을 부여 받음
+                // 앱이 종료된 후 다시 시작되면 해당 uri에 대한 접근 권한이 완전히 사라지므로, 사용자 프로필 변경 작업을 앱이 재시작하더라도 유지되게 refactoring할 때
+                // uri를 이용해 불러온 이미지를 앱에 할당된 저장 공간에 저장한 후, 해당 uri로 변환해야 함
+                contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 updateUserProfileImage(uri)
             }
         }

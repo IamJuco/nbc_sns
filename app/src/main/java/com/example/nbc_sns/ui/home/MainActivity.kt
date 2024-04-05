@@ -9,7 +9,6 @@ import com.example.nbc_sns.databinding.ActivityMainBinding
 import com.example.nbc_sns.ui.PostManager
 import com.example.nbc_sns.ui.UserManager
 import com.example.nbc_sns.ui.login.LogInActivity
-import com.example.nbc_sns.ui.login.RegisterActivity
 import com.example.nbc_sns.ui.profile.ProfileActivity
 import com.example.nbc_sns.util.insertDummyData
 import kotlin.random.Random

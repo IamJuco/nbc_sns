@@ -62,8 +62,11 @@ class RegisterActivity : AppCompatActivity() {
 
                 pw != rePw -> Toast.makeText(this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
 
-                listOf(name, id, pw, rePw).any { it.isNullOrBlank() } ->
-                    Toast.makeText(this, "입력되지 않은 정보가 있습니다", Toast.LENGTH_SHORT).show()
+                listOf(name, id, pw, rePw).any { it.isNullOrBlank() } -> Toast.makeText(
+                    this,
+                    "입력되지 않은 정보가 있습니다",
+                    Toast.LENGTH_SHORT
+                ).show()
 
                 else -> {
                     val userInfo = UserInfo(id, pw, name, null, "")

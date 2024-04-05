@@ -5,6 +5,7 @@
         <!-- statusBarColor = 앱 상태 색깔 변경 -->
         <item name="android:statusBarColor">@color/white</item>
 
+<!--        타이틀바 삭제-->
         <item name="windowNoTitle">true</item>
         <!-- statusBarColor = 앱 상대 아이콘 색깔 변경 true = black, false = white -->
         <item name="android:windowLightStatusBar">true</item>

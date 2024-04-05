@@ -88,22 +88,23 @@ class ProfileActivity : AppCompatActivity(), PostClickListener {
     }
 
     private fun initView() {
-        if (!UserManager.isLogin) {
-            binding.btnEditProfileThumbnail.visibility = View.VISIBLE
-            binding.btnCreatePost.visibility = View.VISIBLE
-            binding.btnLogout.visibility = View.VISIBLE
-            binding.btnEditProfileIntroduction.visibility = View.VISIBLE
-        } else {
-            binding.btnEditProfileThumbnail.visibility = View.GONE
-            binding.btnCreatePost.visibility = View.GONE
-            binding.btnLogout.visibility = View.GONE
-            binding.btnEditProfileIntroduction.visibility = View.GONE
-        }
         binding.ivThumbnail.clipToOutline = true // xml 설정은 API 30 이하에서 적용되지 않아 코드로 적용해야 함
         userId = intent.getStringExtra(BUNDLE_KEY_FOR_USER_ID_CHECK) ?: run {
             Toast.makeText(this, "유저 정보가 없습니다.", Toast.LENGTH_SHORT).show()
             return
         }
+        if (UserManager.loggedId == userId) {
+            binding.btnEditProfileThumbnail.visibility = View.VISIBLE
+            binding.btnCreatePost.visibility = View.VISIBLE
+            binding.btnLogout.visibility = View.VISIBLE
+            binding.btnEditProfileIntroduction.visibility = View.VISIBLE
+        } else {
+            binding.btnEditProfileThumbnail.visibility = View.INVISIBLE
+            binding.btnCreatePost.visibility = View.INVISIBLE
+            binding.btnLogout.visibility = View.INVISIBLE
+            binding.btnEditProfileIntroduction.visibility = View.INVISIBLE
+        }
+
         updateUserProfile()
         updateUIAboutPost()
     }

@@ -20,30 +20,38 @@
 
         <activity
             android:name="com.example.nbc_sns.ui.login.RegisterActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
 
         <activity
             android:name="com.example.nbc_sns.ui.login.LogInActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
 
         <activity
             android:name=".ui.profile.ProfileActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.createPost.CreatePostActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.selectImage.SelectImageActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.post.PostActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.detail.DetailPageActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.home.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>

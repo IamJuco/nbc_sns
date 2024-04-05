@@ -309,17 +309,17 @@ fun createMamamoo() {
         "[#문별]\n" +
                 "\n" +
                 "Moon Byul 1st Full Album\n" +
-                "[Starlit of Muse] 앨범 발매 및 MV 공개:두꺼운_확인_표시:\n" +
+                "[Starlit of Muse] 앨범 발매 및 MV 공개\n" +
                 "\n" +
                 "우리 무무 여러분 각 음원\n" +
-                "사이트에서 많은 감상과:헤드폰:\n" +
-                "사랑:두_손으로_만든_하트::피부톤-2: 그리고 응원:메가: 부탁드립니다:안아주는_얼굴:\n" +
+                "사이트에서 많은 감상과\n" +
+                "사랑 그리고 응원 부탁드립니다\n" +
                 "\n" +
-                ":둥근_압핀: Melon\n" +
-                ":링크: https://kko.to/0AR_Sesm-G\n" +
+                "Melon\n" +
+                "https://kko.to/0AR_Sesm-G\n" +
                 "\n" +
-                ":둥근_압핀: MV\n" +
-                ":링크: https://youtu.be/_EWKB1lVsyI\n" +
+                "MV\n" +
+                "https://youtu.be/_EWKB1lVsyI\n" +
                 "\n" +
                 "#마마무 #MoonByul #Starlit_of_Muse\n" +
                 "#TOUCHIN_MOVIN #터친앤무빈\n" +

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileActivity">
 
-
     <ImageView
         android:id="@+id/ib_back"
         android:layout_width="wrap_content"
@@ -28,13 +27,13 @@
         app:layout_constraintTop_toTopOf="@id/ib_back"
         tools:text="newjeans_official" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:backgroundTint="@color/black"
         android:text="@string/logout"
+        android:background="@drawable/radius_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -114,35 +113,36 @@
         app:layout_constraintTop_toBottomOf="@id/iv_thumbnail"
         tools:text="최고의 토론만을 펼치는 엉망잔칭 토론클럽입니다.\n매년 엉망잔칭 토론회를 주관하고 있습니다. 최고의 토론만을 펼치는 엉망잔칭 토론클럽입니다. 매년 엉망잔칭 토론회를 주관하고 있습니다." />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_edit_profile_thumbnail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:backgroundTint="@color/black"
+        android:background="@drawable/radius_button"
         android:text="@string/edit_profile_thumbnail"
         app:layout_constraintEnd_toStartOf="@id/btn_edit_profile_introduction"
         app:layout_constraintStart_toStartOf="@id/tv_introduction"
         app:layout_constraintTop_toBottomOf="@id/tv_introduction" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_edit_profile_introduction"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
         android:layout_marginTop="12dp"
-        android:backgroundTint="@color/black"
+        android:background="@drawable/radius_button"
         android:text="@string/edit_profile_introduction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_edit_profile_thumbnail"
         app:layout_constraintTop_toBottomOf="@id/tv_introduction" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_create_post"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         android:layout_marginTop="12dp"
-        android:backgroundTint="@color/black"
+        android:background="@drawable/radius_button"
         android:text="@string/write_post"
         app:layout_constraintEnd_toEndOf="@id/btn_logout"
         app:layout_constraintTop_toBottomOf="@id/btn_logout" />

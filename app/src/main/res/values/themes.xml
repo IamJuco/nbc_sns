@@ -4,9 +4,15 @@
         <item name="android:background">@color/white</item>
         <!-- statusBarColor = 앱 상태 색깔 변경 -->
         <item name="android:statusBarColor">@color/white</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:colorButtonNormal">@color/white</item>
+
+<!--        타이틀바 삭제-->
+        <item name="windowNoTitle">true</item>
         <!-- statusBarColor = 앱 상대 아이콘 색깔 변경 true = black, false = white -->
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.Nbc_sns" parent="Base.Theme.Nbc_sns" />
+
 </resources>

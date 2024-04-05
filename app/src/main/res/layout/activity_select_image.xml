@@ -43,7 +43,7 @@
         tools:itemCount="2"
         tools:listitem="@layout/item_selected_image" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_select"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -71,9 +71,6 @@ class RegisterActivity : AppCompatActivity() {
 
                     if (registerSuccess) {
                         Toast.makeText(this, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show()
-
-                        intent.putExtra("id", id)
-                        intent.putExtra("pw", pw)
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                         finish()
 

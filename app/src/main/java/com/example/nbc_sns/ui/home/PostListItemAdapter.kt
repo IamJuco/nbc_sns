@@ -3,6 +3,7 @@ package com.example.nbc_sns.ui.home
 import android.content.Intent
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nbc_sns.databinding.RecyclerviewPostListItemBinding
@@ -63,12 +64,18 @@ class PostListItemAdapter(
 
             // 게시글 유저 프로필 클릭 이벤트
             binding.ivProfileItem.setOnClickListener {
-                imageClickListener.click(userInfo?.thumbnail!!)
+                binding.ivLargeItem.setImageURI(userInfo?.thumbnail)
+                binding.ivLargeItem.visibility = View.VISIBLE
             }
 
             // 게시글 유저 포스트 이미지 클릭 이벤트
             binding.ivPostImage.setOnClickListener {
-                imageClickListener.click(imageUri)
+                binding.ivLargeItem.setImageURI(imageUri)
+                binding.ivLargeItem.visibility = View.VISIBLE
+            }
+
+            binding.ivLargeItem.setOnClickListener {
+                binding.ivLargeItem.visibility = View.INVISIBLE
             }
 
             // 게시글 유저 아이디 클릭 이벤트
